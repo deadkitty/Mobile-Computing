@@ -1,0 +1,56 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="JapanischTrainer.Pages.ShowGrammarPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:JapanischTrainer.Pages"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <Canvas x:Name="LayoutRoot" Background="White">
+        <StackPanel Height="748" Width="460" Canvas.Left="10" Canvas.Top="10">
+            <TextBlock TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="17.333" Foreground="Black">
+                <Run Text="は" FontWeight="Bold"/><LineBreak/>
+                <Run Text="私"/><Run Text="は" TextDecorations="Underline"/><Run Text="マイク・ミラーです。"/><LineBreak/>
+                <Run Text="私"/><Run Text="は" TextDecorations="Underline"/><Run Text="朝６時に起きます。"/><LineBreak/>
+                <Run Text="桜"/><Run Text="は" TextDecorations="Underline"/><Run Text="きれいです。"/><LineBreak/>
+                <Run Text="ニューヨーク"/><Run Text="は" TextDecorations="Underline"/><Run Text="今何時ですか。"/><LineBreak/>
+                <Run Text="日曜日"/><Run Text="は" TextDecorations="Underline"/><Run Text="友達と奈良へ行きました。"/><LineBreak/>
+                <Run Text="資料"/><Run Text="は" TextDecorations="Underline"/><Run Text="ファクスで送ってください。"/><LineBreak/>
+                <LineBreak/>
+                
+                <Run Text="も" FontWeight="Bold"/><LineBreak/>
+                <Run Text="マリアさん"/><Run Text="も" TextDecorations="Underline"/><Run Text="ブラジル人です。"/><LineBreak/>
+                <Run Text="この荷物"/><Run Text="も" TextDecorations="Underline"/><Run Text="お願いします。"/><LineBreak/>
+                <Run Text="どちら"/><Run Text="も" TextDecorations="Underline"/><Run Text="好きです。"/><LineBreak/>
+                <Run Text="何回"/><Run Text="も" TextDecorations="Underline"/><Run Text="ダイエットをしたことがあります。"/><LineBreak/>
+                <Run Text="どこ"/><Run Text="も" TextDecorations="Underline"/><Run Text="行きませんでした。"/><LineBreak/>
+                <Run Text="何"/><Run Text="も" TextDecorations="Underline"/><Run Text="食べませんでした。"/><LineBreak/>
+                <Run Text="だれ"/><Run Text="も" TextDecorations="Underline"/><Run Text="いませんでした"/><LineBreak/>
+                <LineBreak/>
+                
+                <Run Text="を" FontWeight="Bold"/><LineBreak/>
+                <Run Text="私はジュース"/><Run Text="を" TextDecorations="Underline"/><Run Text="飲みます。"/><LineBreak/>
+                <Run Text="１週間旅行"/><Run Text="を" TextDecorations="Underline"/><Run Text="します。"/><LineBreak/>
+                <Run Text="２時に子ども"/><Run Text="を" TextDecorations="Underline"/><Run Text="迎えに行きます。"/><LineBreak/>
+                <Run Text="きのう会社"/><Run Text="を" TextDecorations="Underline"/><Run Text="休みします。"/><LineBreak/>
+                <Run Text="毎朝８時にうち"/><Run Text="を" TextDecorations="Underline"/><Run Text="出ます。"/><LineBreak/>
+                <Run Text="京都で電車"/><Run Text="を" TextDecorations="Underline"/><Run Text="降ります。"/><LineBreak/>
+                <Run Text="毎朝公園"/><Run Text="を" TextDecorations="Underline"/><Run Text="散歩します。"/><LineBreak/>
+                <Run Text="あの信号"/><Run Text="を" TextDecorations="Underline"/><Run Text="渡ってください。"/><LineBreak/>
+                <Run Text="この道"/><Run Text="を" TextDecorations="Underline"/><Run Text="まっすぐ行くと、駅があります。"/><LineBreak/>
+                <LineBreak/>
+                ...
+
+            </TextBlock>
+        </StackPanel>
+
+    </Canvas>
+</phone:PhoneApplicationPage>

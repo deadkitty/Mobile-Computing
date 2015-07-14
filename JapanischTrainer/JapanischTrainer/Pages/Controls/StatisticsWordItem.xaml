@@ -1,0 +1,34 @@
+﻿<UserControl 
+    x:Class="JapanischTrainer.Pages.Controls.StatisticsWordItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+	Height="auto" Width="480">
+
+    <StackPanel Name="LayoutRoot" Background="#7F0D78F9" Margin="10">
+        <TextBlock Name="wordTextblock" Height="auto" Width="auto" TextWrapping="Wrap" MaxWidth="440" Foreground="Black" FontSize="26.667" FontFamily="Consolas" Margin="10,0" >私 - わたし - ich</TextBlock>
+
+        <Grid Name="kanaGrid">
+            <TextBlock Text="Richtig" Width="auto" Foreground="Black" Margin="10,0,0,0" HorizontalAlignment="Left"/>
+            <TextBlock Name="correctKanaTextblock" Text="45%" Width="auto" Foreground="Black" Margin="76,0,0,0" HorizontalAlignment="Left"/>
+            <TextBlock Text="Falsch" Width="auto" Foreground="Black" Margin="0,0,60,0" HorizontalAlignment="Right"/>
+            <TextBlock Name="wrongKanaTextblock" Text="55%" Width="auto" Foreground="Black" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+            <TextBlock Text="Deutsch->Japanisch"  Width="auto" Foreground="Black" HorizontalAlignment="Center"/>
+        </Grid>
+        <ProgressBar Name="kanaProgressBar"  Background="#FFFF5151" Foreground="#FF69FF70" Value="45" Height="10"/>
+
+        <Grid Name="kanjiGrid">
+            <TextBlock Text="Richtig" Width="auto" Foreground="Black" Margin="10,0,0,0" HorizontalAlignment="Left"/>
+            <TextBlock Name="correctKanjiTextblock" Text="45%" Width="auto" Foreground="Black" Margin="76,0,0,0" HorizontalAlignment="Left"/>
+            <TextBlock Text="Falsch"  Width="auto" Foreground="Black" Margin="0,0,60,0" HorizontalAlignment="Right"/>
+            <TextBlock Name="wrongKanjiTextblock" Text="55%" Width="auto" Foreground="Black" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+            <TextBlock Text="Japanisch->Deutsch"  Width="auto" Foreground="Black" HorizontalAlignment="Center"/>
+        </Grid>
+        <ProgressBar Name="kanjiProgressBar" Background="#FFFF5151" Foreground="#FF69FF70" Value="45" Height="10"/>
+    </StackPanel>
+</UserControl>

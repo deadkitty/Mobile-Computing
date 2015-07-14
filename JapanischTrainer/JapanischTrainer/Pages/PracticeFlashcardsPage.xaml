@@ -1,0 +1,52 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="JapanischTrainer.Pages.PracticeFlashcardsPage" 
+    xmlns:Controls="clr-namespace:JapanischTrainer.Pages.Controls" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Controls:DetailKanjiItem Name="detailKanjiItem" Grid.Row="0" Grid.ColumnSpan="2"/>
+
+        <!--<Button Name="correctButton" Content="Richtig" Foreground="Black" Grid.Row="1" Grid.Column="0" Background="#FF39F798" Click="correctButton_Click"/>
+        <Button Name="wrongButton"   Content="Falsch"  Foreground="Black" Grid.Row="1" Grid.Column="1" Background="#FFFF7171" Click="wrongButton_Click"/>-->
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Name="correct1Button" Click="correct1Button_Click" Grid.Column="0" FontSize="10" Foreground="Black" Background="#FF39F798" Margin="-11,0" Content="Richtig"/>
+            <Button Name="correct2Button" Click="correct2Button_Click" Grid.Column="1" FontSize="10" Foreground="Black" Background="#FF39F798" Margin="-11,0" Content="Richtig,&#x0a;mit Zögern"/>
+            <Button Name="correct3Button" Click="correct3Button_Click" Grid.Column="2" FontSize="10" Foreground="Black" Background="#FF39F798" Margin="-11,0" Content="Richtig, schwer&#x0a;zu merken"/>
+            <Button Name="wrong1Button"   Click="wrong1Button_Click"   Grid.Column="3" FontSize="10" Foreground="Black" Background="#FFFF7171" Margin="-11,0" Content="fast Richtig"/>
+            <Button Name="wrong2Button"   Click="wrong2Button_Click"   Grid.Column="4" FontSize="10" Foreground="Black" Background="#FFFF7171" Margin="-11,0" Content="Falsch, geht&#x0a;aber noch"/>
+            <Button Name="wrong3Button"   Click="wrong3Button_Click"   Grid.Column="5" FontSize="10" Foreground="Black" Background="#FFFF7171" Margin="-11,0"  Content="Vergessen"/>
+        </Grid>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>

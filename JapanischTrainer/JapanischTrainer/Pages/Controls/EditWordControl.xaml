@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="JapanischTrainer.Pages.Controls.EditWordControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    Width="auto" Height="auto">
+
+    <Grid x:Name="editGrid" Margin="20,0,20,25" Background="#D651A0FF" Height="693" VerticalAlignment="Bottom">
+        <StackPanel>
+            <TextBlock Text="Kana" Margin="10,0,10,-10"/>
+            <TextBox x:Name="kanaTextbox"        FontFamily="Consolas" Foreground="Black" FontWeight="Bold" FontSize="20" Height="85" TextWrapping="Wrap"/>
+            <TextBlock Text="Kanji" Margin="10,0,10,-10"/>
+            <TextBox x:Name="kanjiTextbox"       FontFamily="Consolas" Foreground="Black" FontWeight="Bold" FontSize="20" Height="85" TextWrapping="Wrap"/>
+            <TextBlock Text="Deutsch" Margin="10,0,10,-10"/>
+            <TextBox x:Name="translationTextbox" FontFamily="Consolas" Foreground="Black" FontWeight="Bold" FontSize="20" Height="85" TextWrapping="Wrap"/>
+            <TextBlock Text="Beschreibung" Margin="10,0,10,-10"/>
+            <TextBox x:Name="descriptionTextbox" FontFamily="Consolas" Foreground="Black" FontWeight="Bold" FontSize="20" Height="85" TextWrapping="Wrap"/>
+
+            <TextBlock Text="Typ:                      Beschreibung Anzeigen:" Margin="10,0"/>
+            <StackPanel Orientation="Horizontal">
+
+                <ListBox x:Name="typeListbox" SelectionMode="Single" Height="110" Margin="10,0">
+                    <ListBoxItem Content="Nomen"/>
+                    <ListBoxItem Content="Verb I"/>
+                    <ListBoxItem Content="Verb II"/>
+                    <ListBoxItem Content="Verb III"/>
+                    <ListBoxItem Content="い-Adjektiv"/>
+                    <ListBoxItem Content="な-Adjektiv"/>
+                    <ListBoxItem Content="Adverb"/>
+                    <ListBoxItem Content="Partikel"/>
+                    <ListBoxItem Content="Sonstiges"/>
+                </ListBox>
+                <ListBox x:Name="showFlagListbox" SelectionMode="Single" Height="110" Margin="48,0">
+                    <ListBoxItem Content="nie anzeigen"/>
+                    <ListBoxItem Content="Bei Deutschem Wort anz."/>
+                    <ListBoxItem Content="Bei Japanischem Wort anz."/>
+                    <ListBoxItem Content="Immer Anzeigen"/>
+                </ListBox>
+            </StackPanel>
+
+        </StackPanel>
+        <Button x:Name="editButton" Content="Ändern" VerticalAlignment="Bottom" Margin="0,0,0,65" Foreground="Black" BorderBrush="Transparent" Height="65" BorderThickness="0" Background="#CC77FF62" Click="editButton_Click"/>
+        <Button x:Name="cancelButton" Content="Abbrechen" VerticalAlignment="Bottom" Margin="0" Foreground="Black" BorderBrush="Transparent" Height="65" BorderThickness="0" Background="#CCFF3939" Click="cancelButton_Click"/>
+    </Grid>
+</UserControl>

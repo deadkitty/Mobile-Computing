@@ -1,0 +1,33 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="JapanischTrainer.Pages.PracticeInsertPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MinHeight="180"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="sentenceTextblock" Grid.Row="0" Text="昨日の新聞（に…）______ 、日本の女性は世界で一番長生きするそうです。" Foreground="Black" Margin="20" TextWrapping="Wrap" FontSize="30"/>
+
+        <TextBox x:Name="targetWordTextbox" Grid.Row="1" Foreground="Black" FontSize="30" Margin="70,0" TextWrapping="Wrap" BorderBrush="Black"
+                 VerticalAlignment="Top" BorderThickness="0,0,0,3" Text="飛行機" KeyUp="targetWordTextbox_KeyUp" GotFocus="targetWordTextbox_GotFocus" />
+
+        <Button Grid.Row="2" Name="nextButton" Content="Weiter"     Foreground="Black" Background="#FF88F18D" Click="nextButton_Click" Visibility="Collapsed"/>
+        <Button Grid.Row="2" Name="okButton"   Content="Überprüfen" Foreground="Black" Background="#FF88F18D" Click="okButton_Click"/>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>

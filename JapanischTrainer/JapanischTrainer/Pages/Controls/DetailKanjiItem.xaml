@@ -1,0 +1,54 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:JapanischTrainer.Pages.Controls"
+	mc:Ignorable="d"
+	x:Class="JapanischTrainer.Pages.Controls.DetailKanjiItem"
+	d:DesignWidth="480" d:DesignHeight="800">
+    <Grid x:Name="LayoutRoot" Margin="8">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" MinHeight="240"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" MinHeight="61"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" MinHeight="70"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" MinHeight="70"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" MinHeight="70"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Foreground="#FFB6B6B6" Text="Kanji" />
+        <TextBlock Grid.Row="2" Foreground="#FFB6B6B6" Text="Übersetzung" />
+        <TextBlock Grid.Row="4" Foreground="#FFB6B6B6" Text="Onyomi"/>
+        <TextBlock Grid.Row="6" Foreground="#FFB6B6B6" Text="Kunyomi"/>
+        <TextBlock Grid.Row="8" Foreground="#FFB6B6B6" Text="Beispiel"/>
+
+        <Grid x:Name="kanjiGrid" Grid.Row="1" Tap="kanjiGrid_Tap">
+            <TextBlock x:Name="kanjiTabTextblock" Foreground="#FFB6B6B6" FontSize="25"  TextAlignment="Center" Text="zum anzeigen hier tippen" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <TextBlock x:Name="kanjiTextblock"    Foreground="Black"     FontSize="200" TextAlignment="Center" Text="空" FontFamily="/JapanischTrainer;component/Fonts/Fonts.zip#DFKai-SB"/>
+        </Grid>
+        
+        <TextBlock Grid.Row="3" x:Name="meaningTextblock" Margin="0,5,0,20" TextWrapping="Wrap" Foreground="Black" VerticalAlignment="Top" FontSize="29.333" FontFamily="/JapanischTrainer;component/Fonts/Fonts.zip#DFKai-SB" Text="Himmel, Frei werden, leer"/>
+
+        <Grid x:Name="onyomiGrid" Grid.Row="5" Tap="onyomiGrid_Tap">
+            <TextBlock x:Name="onyomiTabTextblock" Foreground="#FFB6B6B6" FontSize="25"  TextAlignment="Center" Text="zum anzeigen hier tippen" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <TextBlock Grid.Row="5" x:Name="onyomiTextblock"  Margin="0,5,0,20" TextWrapping="Wrap" Foreground="Black" VerticalAlignment="Top" FontSize="37.333" FontFamily="/JapanischTrainer;component/Fonts/Fonts.zip#DFKai-SB" Text="クウ"/>
+        </Grid>
+
+        <Grid x:Name="kunyomiGrid" Grid.Row="7" Tap="kunyomiGrid_Tap">
+            <TextBlock x:Name="kunyomiTabTextblock" Foreground="#FFB6B6B6" FontSize="25"  TextAlignment="Center" Text="zum anzeigen hier tippen" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <TextBlock Grid.Row="7" x:Name="kunyomiTextblock" Margin="0,5,0,20" TextWrapping="Wrap" Foreground="Black" VerticalAlignment="Top" FontSize="37.333" FontFamily="/JapanischTrainer;component/Fonts/Fonts.zip#DFKai-SB" Text="あ（ける）、から"/>
+        </Grid>
+
+        <Grid x:Name="exampleGrid" Grid.Row="9" Tap="exampleGrid_Tap">
+            <TextBlock x:Name="exampleTabTextblock" Foreground="#FFB6B6B6" FontSize="25"  TextAlignment="Center" Text="zum anzeigen hier tippen" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <TextBlock Grid.Row="9" x:Name="exampleTextblock" Margin="0,5,0,20" TextWrapping="Wrap" Foreground="Black" VerticalAlignment="Top" FontSize="37.333" FontFamily="/JapanischTrainer;component/Fonts/Fonts.zip#DFKai-SB" Text="空港 - くうこう - Flughafen"/>
+        </Grid>
+        
+    </Grid>
+</UserControl>

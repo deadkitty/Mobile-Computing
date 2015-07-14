@@ -1,0 +1,38 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="JapanischTrainer.Pages.PracticeConjugationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:Controls="clr-namespace:JapanischTrainer.Pages.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:JapanischTrainer.Pages"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot ist das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
+    <Grid x:Name="LayoutRoot" Background="White">
+        <ScrollViewer>
+            <Grid Margin="0, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="600"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Name="itemsStackPanel" Grid.Row="0">
+                    
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Bottom">
+                    <Button Name="nextButton" Content="Weiter"     Foreground="Black" Width="240"  Background="#FF88F18D" Click="nextButton_Click" Visibility="Collapsed"/>
+                    <Button Name="okButton"   Content="Überprüfen" Foreground="Black" Width="240"  Background="#FF88F18D" Click="okButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</phone:PhoneApplicationPage>

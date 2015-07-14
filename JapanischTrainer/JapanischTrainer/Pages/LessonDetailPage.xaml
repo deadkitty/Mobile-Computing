@@ -1,0 +1,42 @@
+﻿<phone:PhoneApplicationPage
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:JapanischTrainer.Pages"
+	xmlns:Controls="clr-namespace:JapanischTrainer.Pages.Controls"
+	x:Class="JapanischTrainer.Pages.LessonDetailPage"
+	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+	FontSize="{StaticResource PhoneFontSizeNormal}"
+	Foreground="{StaticResource PhoneForegroundBrush}"
+	Orientation="Portrait"
+	shell:SystemTray.IsVisible="false">
+
+    <ScrollViewer Background="White">
+        <StackPanel>
+            <TextBlock x:Name="setnameTextblock" Foreground="Black" Text="Minna No Nihongo L15" FontSize="40" TextWrapping="Wrap" Margin="10,0,10,10" />
+            <StackPanel x:Name="wordsPanel">
+
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="true" IsMenuEnabled="True" Mode="Minimized" Opacity="1" BackgroundColor="White" ForegroundColor="Black">
+            <shell:ApplicationBarIconButton x:Name="showStatsIcon"      IconUri="/Assets/AppBar/questionmark.png" Text="Statistik"  Click="showStatsIcon_Click"/>
+            <shell:ApplicationBarIconButton x:Name="showPercentageIcon" IconUri="/Assets/AppBar/percentage.png"   Text="prozent"    Click="showPercentageIcon_Click" IsEnabled="False"/>
+            <shell:ApplicationBarIconButton x:Name="editIcon" 	        IconUri="/Assets/AppBar/edit.png"         Text="bearbeiten" Click="editIcon_Click"/>
+            <shell:ApplicationBarIconButton x:Name="resetLessonIcon"    IconUri="/Assets/AppBar/delete.png"       Text="Reset"      Click="resetLessonIcon_Click"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="showJapStatsItem"    IsEnabled="False" Text="jap. -> deutsch anzeigen" Click="showJapStatsItem_Click"/>
+                <shell:ApplicationBarMenuItem x:Name="showTranslStatsItem" IsEnabled="False" Text="deutsch -> jap. anzeigen" Click="showTranslStatsItem_Click"/>
+                <shell:ApplicationBarMenuItem x:Name="sortAccendingItem"   IsEnabled="False" Text="sortieren aufsteigend"    Click="sortAccendingItem_Click"/>
+                <shell:ApplicationBarMenuItem x:Name="sortDeccendingItem"  IsEnabled="False" Text="sortieren absteigend"     Click="sortDeccendingItem_Click"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>    
+    </phone:PhoneApplicationPage.ApplicationBar>
+    
+</phone:PhoneApplicationPage>

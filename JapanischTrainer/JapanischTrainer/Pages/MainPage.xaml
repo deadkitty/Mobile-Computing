@@ -1,0 +1,90 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="JapanischTrainer.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneBorderBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False" Background="White">
+
+    <Grid x:Name="LayoutRoot">
+        <phone:Panorama Title="Nihongo Senpai ツ" x:Name="panoramaMenu">
+
+            <!--Panoramaelement Übungen-->
+            <phone:PanoramaItem Header="Übungen" x:Name="exerciseMenu" Background="#3B000000">
+                <Grid>
+                    <Button x:Name="practiceVocabButton"        Margin="0,0,0,0"   BorderBrush="Transparent" Background="#8B000000" Padding="0" Click="practiceVocabButton_Click"        VerticalAlignment="Top" Height="75" Content="Vokabeln lernen"/>
+                    <Button x:Name="practiceInsertButton"	    Margin="0,90,0,0"  BorderBrush="Transparent" Background="#8B000000" Padding="0" Click="practiceInsertButton_Click"       VerticalAlignment="Top" Height="75" Content="Lückentext"/>
+                    <Button x:Name="practiceConjuctionButton"   Margin="0,180,0,0" BorderBrush="Transparent" Background="#8B000000" Padding="0" Click="practiceConjuctionButton_Click"   VerticalAlignment="Top" Height="75" Content="Wörter konjugieren"/>
+                    <Button x:Name="practiceCombineWordsButton" Margin="0,270,0,0" BorderBrush="Transparent" Background="#8B000000" Padding="0" Click="practiceCombineWordsButton_Click" VerticalAlignment="Top" Height="75" Content="Wörter zusammensetzen"/>
+                    <Button x:Name="practiceFlashcardsButton"   Margin="0,360,0,0" BorderBrush="Transparent" Background="#8B000000" Padding="0" Click="practiceFlashcardsButton_Click"   VerticalAlignment="Top" Height="75" Content="Kanjiflashcards"/>
+                </Grid>
+            </phone:PanoramaItem>
+
+            <!--Panoramaelement Erklärungen-->
+            <phone:PanoramaItem Header="Erklärungen" x:Name="explanationMenu" Background="#3B000000">
+                <Grid>
+                    <Button x:Name="showWordsButton"   Margin="0,0,0,0"   BorderBrush="Transparent" Background="#8B000000" Padding="0" Click="showWordsButton_Click"   VerticalAlignment="Top" Height="75" Content="Wörter anzeigen"/>
+                    <Button x:Name="showKanjiButton"   Margin="0,90,0,0"  BorderBrush="Transparent" Background="#8B000000" Padding="0" Click="showKanjiButton_Click"   VerticalAlignment="Top" Height="75" Content="Kanji anzeigen"/>
+                    <Button x:Name="showGrammarButton" Margin="0,180,0,0" BorderBrush="Transparent" Background="#8B000000" Padding="0" Click="showGrammarButton_Click" VerticalAlignment="Top" Height="75" Content="Grammatik"/>
+                    <Button x:Name="searchWordsButton" Margin="0,270,0,0" BorderBrush="Transparent" Background="#8B000000" Padding="0" Click="searchWordsButton_Click" VerticalAlignment="Top" Height="75" Content="Wörter suchen"/>
+                </Grid>
+            </phone:PanoramaItem>
+
+            <!--Panoramaelement Einstellungen-->
+            <phone:PanoramaItem Header="Einstellungen" x:Name="settingsMenu" Background="#3B000000">
+                <ScrollViewer>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0">
+                                <CheckBox x:Name="loadAllWordsCheckBox" Content="Alle Wörter laden" Height="72" Background="#7FA5FF59" BorderBrush="Transparent" BorderThickness="0" Checked="loadAllWordsCheckBox_Checked" Unchecked="loadAllWordsCheckBox_Unchecked"/>
+
+                                <Slider	   x:Name="correctWrongRelationSlider"	  Margin="0,-20,0,0"   Minimum="1" Maximum="100" SmallChange="1"/>
+                                <TextBlock x:Name="correctWrongRelationTextblock" Margin="10,-35,10,0" Text="Richtig/Falsch Relation"/>
+
+                                <Slider	   x:Name="minimumCountSlider"        Margin="0,0,0,0"    Minimum="1" Maximum="20" SmallChange="1"/>
+                                <TextBlock x:Name="minimumWordCountTextblock" Margin="10,-35,10,0" Text="Wörter mindestens gelernt"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1">
+                                <CheckBox x:Name="partLessonsCheckBox" Content="Teillektionen lernen" Height="72" Background="#7FA5FF59" BorderBrush="Transparent" BorderThickness="0" Checked="partLessonsCheckBox_Checked"  Unchecked="partLessonsCheckBox_Unchecked"/>
+
+                                <Slider	   x:Name="partLessonsCountSlider"    Margin="0,-20,0,0"    Minimum="5" Maximum="50" SmallChange="1" IsEnabled="False"/>
+                                <TextBlock x:Name="partLessonsCountTextblock" Margin="10,-35,10,0" Text="Wörter pro Teillektion"/>
+                            </StackPanel>
+
+                            <CheckBox x:Name="showDescCheckBox" Grid.Row="2" Content="Beschreibung anzeigen" Height="72" Background="#7FA5FF59" BorderBrush="Transparent" BorderThickness="0" Checked="showDescCheckBox_Checked" Unchecked="showDescCheckBox_Unchecked" IsChecked="true"/>
+                        </Grid>
+
+                        <Button x:Name="changeBackgroundButton" Content="Hintergrund auswählen" Background="#8B000000" BorderThickness="0" Click="changeBackgroundButton_Click" FontSize="24" Padding="10,8,10,12"/>
+                        <Button x:Name="resetLearnsetsButton"   Content="Übungen zurücksetzen"  Background="#8B000000" BorderThickness="0" Click="resetLearnsetsButton_Click"   FontSize="24" Padding="10,8,10,12"/>
+                        <Button x:Name="addContentButton"       Content="Inhalt hinzufügen"     Background="#8B000000" BorderThickness="0" Click="addContentButton_Click"       FontSize="24" Padding="10,8,10,12"/>
+                        <Button x:Name="exportDatabaseButton"   Content="Datenbank exportieren" Background="#8B000000" BorderThickness="0" Click="exportDatabaseButton_Click"   FontSize="24" Padding="10,8,10,12"/>
+                        <TextBlock Height="auto" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="17.333" Margin="10,0">
+                            <Run Text="*Richtig/Falsch Relation:"/><LineBreak/>
+                            <Run Text="Zeigt an zu wie viel Prozent ein Wort richtig beantwortet worden sein musste um es zukünftig nichtmehr anzeigen zu lassen."/><LineBreak/>
+                            <Run Text="*Wörter Mindestens Gelernt:"/><LineBreak/>
+                            <Run Text="Gibt an wie oft man ein Wort mindestens Gelernt haben muss bevor die Richtig/Falsch Relation greift."/><LineBreak/>
+                            <Run Text="*Wörter pro Teillektion:"/><LineBreak/>
+                            <Run Text="Gibt an wieviele Wörter maximal aufeinmal geladen werden beim üben."/><LineBreak/>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+    </Grid>
+
+
+</phone:PhoneApplicationPage>
