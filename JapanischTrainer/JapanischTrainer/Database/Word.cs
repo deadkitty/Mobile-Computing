@@ -11,18 +11,19 @@ namespace JapanischTrainer.Database
 
         public enum EType
         {
-            noun = 0,
-            verb1 = 1,
-            verb2 = 2,
-            verb3 = 3,
-            iAdjective = 4,
-            naAdjective = 5,
-            adverb = 6,
-            particle = 7,
-            other = 8,
-            suffix = 9,
-            prefix = 10,
-            count = 11,
+            noun,
+            verb1,
+            verb2,
+            verb3,
+            iAdjective,
+            naAdjective,
+            adverb,
+            particle,
+            other,
+            suffix,
+            prefix,
+            phrase,
+            count,
             undefined = -1,
         }
 
@@ -112,12 +113,12 @@ namespace JapanischTrainer.Database
 
         public float CorrectWrongRelationTranslation
         {
-            get { return correctTranslation / (float)(correctTranslation + wrongTranslation); }
+            get { return correctTranslation / (float)(CorrectWrongCountTranslation == 0 ? 1 : CorrectWrongCountTranslation); }
         }
 
         public float CorrectWrongRelationJapanese
         {
-            get { return correctJapanese / (float)(correctJapanese + wrongJapanese); }
+            get { return correctJapanese / (float)(CorrectWrongCountJapanese == 0 ? 1 : CorrectWrongCountJapanese); }
         }
 
         public int TimeStampJapanese
@@ -230,7 +231,7 @@ namespace JapanischTrainer.Database
             sb.Append("|");
             sb.Append(description != null ? description : "");
 
-            return sb.ToString();
+            return CorrectWrongRelationJapanese + " " + CorrectWrongRelationTranslation + "  " + sb.ToString();
         }
 
         /// <summary>
@@ -352,6 +353,7 @@ namespace JapanischTrainer.Database
                 case EType.other      : return "o";
                 case EType.prefix     : return "suf";
                 case EType.suffix     : return "pre";
+                case EType.phrase     : return "phr";
                 default               : return "";
             }
         }
@@ -374,6 +376,7 @@ namespace JapanischTrainer.Database
                 case "o"  : return (int)EType.other;
                 case "pre": return (int)EType.prefix;
                 case "suf": return (int)EType.suffix;
+                case "phr": return (int)EType.phrase;
                 default   : return (int)EType.other;
             }
         }
@@ -396,6 +399,7 @@ namespace JapanischTrainer.Database
                 case EType.particle   : return "Partikel";
                 case EType.prefix     : return "Präfix";
                 case EType.suffix     : return "Suffix";
+                case EType.phrase     : return "Phrase";
                 default: return "";
             }
         }

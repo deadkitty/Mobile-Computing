@@ -144,17 +144,23 @@ namespace JapanischTrainer.Pages
         {
             int loadOptions = AppSettings.LoadOptions;
 
+            otherCheckbox.IsChecked = loadOptions % 2 == 1 ? true : false;
+            loadOptions >>= 1;
+            phrCheckbox  .IsChecked = loadOptions % 2 == 1 ? true : false;
+            loadOptions >>= 1;
+            suffCheckbox .IsChecked = loadOptions % 2 == 1 ? true : false;
+            loadOptions >>= 1;
+            prevCheckbox .IsChecked = loadOptions % 2 == 1 ? true : false;
+            loadOptions >>= 1;
             partCheckbox .IsChecked = loadOptions % 2 == 1 ? true : false;
+            loadOptions >>= 1;
+            nounCheckbox .IsChecked = loadOptions % 2 == 1 ? true : false;
+            loadOptions >>= 1;
+            advCheckbox  .IsChecked = loadOptions % 2 == 1 ? true : false;
             loadOptions >>= 1;
             naAdjCheckbox.IsChecked = loadOptions % 2 == 1 ? true : false;
             loadOptions >>= 1;
             iAdjCheckbox .IsChecked = loadOptions % 2 == 1 ? true : false;
-            loadOptions >>= 1;
-            advCheckbox  .IsChecked = loadOptions % 2 == 1 ? true : false;
-            loadOptions >>= 1;
-            otherCheckbox.IsChecked = loadOptions % 2 == 1 ? true : false;
-            loadOptions >>= 1;
-            nounCheckbox .IsChecked = loadOptions % 2 == 1 ? true : false;
             loadOptions >>= 1;
             verb3Checkbox.IsChecked = loadOptions % 2 == 1 ? true : false;
             loadOptions >>= 1;
@@ -173,17 +179,23 @@ namespace JapanischTrainer.Pages
             loadOptions <<= 1;
             loadOptions += verb3Checkbox.IsChecked == true ? 1 : 0;
             loadOptions <<= 1;
-            loadOptions += nounCheckbox.IsChecked  == true ? 1 : 0;
-            loadOptions <<= 1;
-            loadOptions += otherCheckbox.IsChecked == true ? 1 : 0;
-            loadOptions <<= 1;
-            loadOptions += advCheckbox.IsChecked   == true ? 1 : 0;
-            loadOptions <<= 1;
-            loadOptions += iAdjCheckbox.IsChecked  == true ? 1 : 0;
+            loadOptions += iAdjCheckbox .IsChecked == true ? 1 : 0;
             loadOptions <<= 1;
             loadOptions += naAdjCheckbox.IsChecked == true ? 1 : 0;
             loadOptions <<= 1;
-            loadOptions += partCheckbox.IsChecked  == true ? 1 : 0;
+            loadOptions += advCheckbox  .IsChecked == true ? 1 : 0;
+            loadOptions <<= 1;
+            loadOptions += nounCheckbox .IsChecked == true ? 1 : 0;
+            loadOptions <<= 1;          
+            loadOptions += partCheckbox .IsChecked == true ? 1 : 0;
+            loadOptions <<= 1;          
+            loadOptions += prevCheckbox .IsChecked == true ? 1 : 0;
+            loadOptions <<= 1;          
+            loadOptions += suffCheckbox .IsChecked == true ? 1 : 0;
+            loadOptions <<= 1;          
+            loadOptions += phrCheckbox  .IsChecked == true ? 1 : 0;
+            loadOptions <<= 1;
+            loadOptions += otherCheckbox.IsChecked == true ? 1 : 0;
 
             AppSettings.LoadOptions = loadOptions;
         }

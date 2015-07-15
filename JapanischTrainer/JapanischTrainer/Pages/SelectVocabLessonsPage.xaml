@@ -164,81 +164,87 @@
         </phone:PivotItem>
 
         <phone:PivotItem Name="settingsPage" Header="Einstellungen" Padding="0,-30,0,0">
-            <Grid Background="White">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid Name="sortOptionsGrid" Grid.Row="0" Margin="0,0,0,15">
-
+            <ScrollViewer>
+                <Grid Background="White">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Sortieren nach:" Grid.Row="0"/>
-                    <RadioButton Name="radio0" Margin="0,-15" Style="{StaticResource RadioButtonBlackCircle}" Grid.Row="1" Foreground="Black" BorderBrush="Black" Content="Am meisten falsch zuerst"/>
-                    <RadioButton Name="radio1" Margin="0,-15" Style="{StaticResource RadioButtonBlackCircle}" Grid.Row="2" Foreground="Black" BorderBrush="Black" Content="Am längsten nicht gelernt"/>
-                    <RadioButton Name="radio2" Margin="0,-15" Style="{StaticResource RadioButtonBlackCircle}" Grid.Row="3" Foreground="Black" BorderBrush="Black" Content="Nach Lektion"/>
-                    <RadioButton Name="radio3" Margin="0,-15" Style="{StaticResource RadioButtonBlackCircle}" Grid.Row="4" Foreground="Black" BorderBrush="Black" Content="Zufällig" IsChecked="True"/>
+
+                    <Grid Name="sortOptionsGrid" Grid.Row="0" Margin="0,0,0,10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Sortieren nach:" Grid.Row="0"/>
+                        <RadioButton Name="radio0" Margin="0,-15" Style="{StaticResource RadioButtonBlackCircle}" Grid.Row="1" Foreground="Black" BorderBrush="Black" Content="Am meisten falsch zuerst"/>
+                        <RadioButton Name="radio1" Margin="0,-15" Style="{StaticResource RadioButtonBlackCircle}" Grid.Row="2" Foreground="Black" BorderBrush="Black" Content="Am längsten nicht gelernt"/>
+                        <RadioButton Name="radio2" Margin="0,-15" Style="{StaticResource RadioButtonBlackCircle}" Grid.Row="3" Foreground="Black" BorderBrush="Black" Content="Nach Lektion"/>
+                        <RadioButton Name="radio3" Margin="0,-15" Style="{StaticResource RadioButtonBlackCircle}" Grid.Row="4" Foreground="Black" BorderBrush="Black" Content="Zufällig" IsChecked="True"/>
+                    </Grid>
+
+                    <Grid Name="loadOptionsGrid" Grid.Row="1" Margin="0,0,0,10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Auswahl Optionen:" Grid.Row="0"/>
+                        <CheckBox Name="verb1Checkbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="1" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="う-Verben"/>
+                        <CheckBox Name="verb2Checkbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="1" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="る-Verben"/>
+                        <CheckBox Name="verb3Checkbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="2" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="irreguläre Verben"/>
+                        <CheckBox Name="iAdjCheckbox"  Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="2" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="い-Adjektive"/>
+                        <CheckBox Name="naAdjCheckbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="3" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="な-Adjektive"/>
+                        <CheckBox Name="advCheckbox"   Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="3" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Adverben"/>
+                        <CheckBox Name="nounCheckbox"  Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="4" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Nomen"/>
+                        <CheckBox Name="partCheckbox"  Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="4" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Partikel"/>
+                        <CheckBox Name="prevCheckbox"  Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="5" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Präffixe"/>
+                        <CheckBox Name="suffCheckbox"  Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="5" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Suffixe"/>
+                        <CheckBox Name="phrCheckbox"   Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="6" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Phrasen"/>
+                        <CheckBox Name="otherCheckbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="6" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Sonstige"/>
+                    </Grid>
+
+                    <Grid Name="learnModeGrid" Grid.Row="2">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Lernmodus:" Grid.Row="0"/>
+
+                        <Image x:Name="japGerIcon" Grid.Row="1" Grid.Column="0" Width="48" Tap="japGerIcon_Tap" Source="/Assets/AppBar/japaneseGermanSelected.png"/>
+                        <Image x:Name="gerIcon"    Grid.Row="1" Grid.Column="1" Width="48" Tap="gerIcon_Tap"    Source="/Assets/AppBar/german.png"/>
+                        <Image x:Name="japIcon"    Grid.Row="1" Grid.Column="2" Width="48" Tap="japIcon_Tap"    Source="/Assets/AppBar/japanese.png"/>
+
+                        <TextBlock TextAlignment="Center"  Grid.Row="2" Grid.Column="0" Text="jap&#60;->de"/>
+                        <TextBlock TextAlignment="Center"  Grid.Row="2" Grid.Column="1" Text="de->jap"/>
+                        <TextBlock TextAlignment="Center"  Grid.Row="2" Grid.Column="2" Text="jap->de"/>
+                    </Grid>
+
                 </Grid>
-
-                <Grid Name="loadOptionsGrid" Grid.Row="1" Margin="0,0,0,15">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="Auswahl Optionen:" Grid.Row="0"/>
-                    <CheckBox Name="verb1Checkbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="1" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="う-Verben"/>
-                    <CheckBox Name="verb2Checkbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="1" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="る-Verben"/>
-                    <CheckBox Name="verb3Checkbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="2" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="irreguläre Verben"/>
-                    <CheckBox Name="iAdjCheckbox"  Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="2" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="い-Adjektive"/>
-                    <CheckBox Name="naAdjCheckbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="3" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="な-Adjektive"/>
-                    <CheckBox Name="advCheckbox"   Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="3" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Adverben"/>
-                    <CheckBox Name="nounCheckbox"  Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="4" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Nomen"/>
-                    <CheckBox Name="partCheckbox"  Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="4" Grid.Column="1" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Partikel"/>
-                    <CheckBox Name="otherCheckbox" Style="{StaticResource CheckBoxBlackCheckMark}" IsChecked="true" Grid.Row="5" Grid.Column="0" Margin="0,-15" Foreground="Black" BorderBrush="Black" Content="Sonstige"/>
-                </Grid>
-
-                <Grid Name="learnModeGrid" Grid.Row="2">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="Lernmodus:" Grid.Row="0"/>
-
-                    <Image x:Name="japGerIcon" Grid.Row="1" Grid.Column="0" Width="48" Tap="japGerIcon_Tap" Source="/Assets/AppBar/japaneseGermanSelected.png"/>
-                    <Image x:Name="gerIcon"    Grid.Row="1" Grid.Column="1" Width="48" Tap="gerIcon_Tap"    Source="/Assets/AppBar/german.png"/>
-                    <Image x:Name="japIcon"    Grid.Row="1" Grid.Column="2" Width="48" Tap="japIcon_Tap"    Source="/Assets/AppBar/japanese.png"/>
-
-                    <TextBlock TextAlignment="Center"  Grid.Row="2" Grid.Column="0" Text="jap&#60;->de"/>
-                    <TextBlock TextAlignment="Center"  Grid.Row="2" Grid.Column="1" Text="de->jap"/>
-                    <TextBlock TextAlignment="Center"  Grid.Row="2" Grid.Column="2" Text="jap->de"/>
-                </Grid>
-
-            </Grid>
+            </ScrollViewer>
         </phone:PivotItem>
 
     </phone:Pivot>

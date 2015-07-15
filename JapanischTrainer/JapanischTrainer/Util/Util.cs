@@ -22,7 +22,7 @@ namespace JapanischTrainer
 
         public static void SortByCorrectWrongRelation(Word[] words)
         {
-            //get timestamps for both, japanese word and translation and mix them in one array
+            //get relations for both, japanese word and translation and mix them in one array
             float[] correctWrongRelations = new float[words.Length];
 
             for (int i = 0; i < correctWrongRelations.Length; ++i)
@@ -37,16 +37,16 @@ namespace JapanischTrainer
                 }
             }
 
-            //after this, sort these timestamp array and make every step for both
-            //the timestamp array and the data.Words array
+            //after this, sort these relations array and make every step for both
+            //the relations array and the Words array
             for (int i = 0; i < words.Length - 1; ++i)
             {
-                for (int j = 0; j < words.Length - i - 1; ++j)
+                for (int j = i + 1; j < words.Length; ++j)
                 {
-                    if (correctWrongRelations[j] > correctWrongRelations[j + 1])
+                    if (correctWrongRelations[i] > correctWrongRelations[j])
                     {
-                        Swap(ref correctWrongRelations[j], ref correctWrongRelations[j + 1]);
-                        Swap(words[j], words[j + 1]);
+                        Swap(ref correctWrongRelations[i], ref correctWrongRelations[j]);
+                        Swap(ref words[i], ref words[j]);
                     }
                 }
             }
@@ -70,15 +70,15 @@ namespace JapanischTrainer
             }
 
             //after this, sort these timestamp array and make every step for both
-            //the timestamp array and the data.Words array
-            for (int i = 0; i < words.Length - 1; ++i)
+            //the timestamp array and the Words array
+            for (int i = 0; i < words.Length - 1; ++i )
             {
-                for (int j = 0; j < words.Length - i - 1; ++j)
+                for(int j = i + 1; j < words.Length; ++j)
                 {
-                    if (timeStamps[j] > timeStamps[j + 1])
+                    if(timeStamps[i] > timeStamps[j])
                     {
-                        Swap(ref timeStamps[j], ref timeStamps[j + 1]);
-                        Swap(words[j], words[j + 1]);
+                        Swap(ref timeStamps[i], ref timeStamps[j]);
+                        Swap(ref words[i], ref words[j]);
                     }
                 }
             }
@@ -160,67 +160,30 @@ namespace JapanischTrainer
         public static Word.EType[] ExtractTypes(int loadOptions)
         {
             List<Word.EType> types = new List<Word.EType>();
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.particle);
-            }
-
+            
+            if (loadOptions % 2 == 1) types.Add(Word.EType.other);
+            loadOptions >>= 1; 
+            if (loadOptions % 2 == 1) types.Add(Word.EType.phrase);
+            loadOptions >>= 1;            
+            if (loadOptions % 2 == 1) types.Add(Word.EType.suffix);
             loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.naAdjective);
-            }
-
+            if (loadOptions % 2 == 1) types.Add(Word.EType.prefix);
+            loadOptions >>= 1;            
+            if (loadOptions % 2 == 1) types.Add(Word.EType.particle);
             loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.iAdjective);
-            }
-
+            if (loadOptions % 2 == 1) types.Add(Word.EType.noun);
             loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.adverb);
-            }
-
+            if (loadOptions % 2 == 1) types.Add(Word.EType.adverb);
             loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.other);
-            }
-
+            if (loadOptions % 2 == 1) types.Add(Word.EType.naAdjective);
             loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.noun);
-            }
-
+            if (loadOptions % 2 == 1) types.Add(Word.EType.iAdjective);
             loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.verb3);
-            }
-
+            if (loadOptions % 2 == 1) types.Add(Word.EType.verb3);
             loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.verb2);
-            }
-
+            if (loadOptions % 2 == 1) types.Add(Word.EType.verb2);
             loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.verb1);
-            }
+            if (loadOptions % 2 == 1) types.Add(Word.EType.verb1);
 
             return types.ToArray();
         }

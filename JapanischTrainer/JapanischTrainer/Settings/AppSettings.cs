@@ -26,7 +26,7 @@ namespace JapanischTrainer.Settings
 
         private static int timeStamp   = 0;
         private static int sortOrder   = 3;
-        private static int loadOptions = 511;
+        private static int loadOptions = 4095;  //binary : 1111 1111 1111 (at first start load all types)
         
         private static int lastLessonID = 0;
 

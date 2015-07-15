@@ -50,7 +50,7 @@ namespace JapanischTrainer.Controller
 
         private static void LoadLessons()
         {
-            DataManager.LoadWords(VocabData.Lessons, ExtractTypes(AppSettings.LoadOptions));
+            DataManager.LoadWords(VocabData.Lessons, Util.ExtractTypes(AppSettings.LoadOptions));
 
             switch (AppSettings.WordPracticeMethod)
             {
@@ -64,80 +64,12 @@ namespace JapanischTrainer.Controller
 
             switch (AppSettings.SortOrder)
             {
-                case 0: SortByRandom();                      //sort by random first because after all wrong words there would be only words left with no wrong answers and it would 
-                        SortByCorrectWrongRelation(); break; //always be the same pattern then, ger word1, jap word1, ger word2, jap word2, ... so i mix them once at the beginning ;D
-                case 1: SortByTimeStamp()           ; break;
-                case 2: /*Allready Sorted By Lesson*/ break;
-                case 3: SortByRandom()              ; break;
+                case 0: Util.SortByRandom              (VocabData.Words);        //sort by random first because after all wrong words there would be only words left with no wrong answers and it would 
+                        Util.SortByCorrectWrongRelation(VocabData.Words); break; //always be the same pattern then, ger word1, jap word1, ger word2, jap word2, ... so i mix them once at the beginning ;D
+                case 1: Util.SortByTimeStamp           (VocabData.Words); break;
+                case 2: /*Allready Sorted By Lesson*/                     break;
+                case 3: Util.SortByRandom              (VocabData.Words); break;
             }
-        }
-
-        private static Word.EType[] ExtractTypes(int loadOptions)
-        {
-            List<Word.EType> types = new List<Word.EType>();
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.particle);
-            }
-
-            loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.naAdjective);
-            }
-
-            loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.iAdjective);
-            }
-
-            loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.adverb);
-            }
-
-            loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.other);
-            }
-
-            loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.noun);
-            }
-
-            loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.verb3);
-            }
-
-            loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.verb2);
-            }
-
-            loadOptions >>= 1;
-
-            if (loadOptions % 2 == 1)
-            {
-                types.Add(Word.EType.verb1);
-            }
-
-            return types.ToArray();
         }
 
         private static void FilterWords()
@@ -228,94 +160,6 @@ namespace JapanischTrainer.Controller
                 }
 
                 VocabData.Words = words.ToArray();
-            }
-        }
-
-        private static void SortByCorrectWrongRelation()
-        {
-            //get timestamps for both, japanese word and translation and mix them in one array
-            float[] correctWrongRelations = new float[VocabData.Words.Length];
-
-            for (int i = 0; i < correctWrongRelations.Length; ++i)
-            {
-                if (VocabData.Words[i].showJWord)
-                {
-                    correctWrongRelations[i] = VocabData.Words[i].CorrectWrongRelationJapanese;
-                }
-                else
-                {
-                    correctWrongRelations[i] = VocabData.Words[i].CorrectWrongRelationTranslation;
-                }
-            }
-
-            //after this, sort these timestamp array and make every step for both
-            //the timestamp array and the data.Words array
-            for (int i = 0; i < VocabData.Words.Length - 1; ++i)
-            {
-                for (int j = 0; j < VocabData.Words.Length - i - 1; ++j)
-                {
-                    if (correctWrongRelations[j] > correctWrongRelations[j + 1])
-                    {
-                        float hv = correctWrongRelations[j];
-                        correctWrongRelations[j] = correctWrongRelations[j + 1];
-                        correctWrongRelations[j + 1] = hv;
-
-                        Word hvWord = VocabData.Words[j];
-                        VocabData.Words[j] = VocabData.Words[j + 1];
-                        VocabData.Words[j + 1] = hvWord;
-                    }
-                }
-            }
-        }
-
-        private static void SortByTimeStamp()
-        {
-            //get timestamps for both, japanese word and translation and mix them in one array
-            int[] timeStamps = new int[VocabData.Words.Length];
-
-            for (int i = 0; i < timeStamps.Length; ++i)
-            {
-                if (VocabData.Words[i].showJWord)
-                {
-                    timeStamps[i] = VocabData.Words[i].timeStampJapanese;
-                }
-                else
-                {
-                    timeStamps[i] = VocabData.Words[i].timeStampTransl;
-                }
-            }
-
-            //after this, sort these timestamp array and make every step for both
-            //the timestamp array and the data.Words array
-            for (int i = 0; i < VocabData.Words.Length - 1; ++i)
-            {
-                for (int j = 0; j < VocabData.Words.Length - i - 1; ++j)
-                {
-                    if (timeStamps[j] > timeStamps[j + 1])
-                    {
-                        int hv = timeStamps[j];
-                        timeStamps[j] = timeStamps[j + 1];
-                        timeStamps[j + 1] = hv;
-
-                        Word hvWord = VocabData.Words[j];
-                        VocabData.Words[j] = VocabData.Words[j + 1];
-                        VocabData.Words[j + 1] = hvWord;
-                    }
-                }
-            }
-        }
-
-        private static void SortByRandom()
-        {
-            Random rand = new Random();
-
-            for (int i = 0; i < VocabData.Words.Length; ++i)
-            {
-                int newIndex = rand.Next(VocabData.Words.Length);
-
-                Word hv = VocabData.Words[i];
-                VocabData.Words[i] = VocabData.Words[newIndex];
-                VocabData.Words[newIndex] = hv;
             }
         }
 
