@@ -231,7 +231,7 @@ namespace JapanischTrainer.Database
             sb.Append("|");
             sb.Append(description != null ? description : "");
 
-            return CorrectWrongRelationJapanese + " " + CorrectWrongRelationTranslation + "  " + sb.ToString();
+            return sb.ToString();
         }
 
         /// <summary>
@@ -322,7 +322,7 @@ namespace JapanischTrainer.Database
         /// <summary>
         /// <para>Updates the Word</para>
         /// <para>updateString Pattern Should Be:</para>
-        /// <para>id|kana|kanji|translation|description</para>
+        /// <para>id|kana|kanji|translation|description|type</para>
         /// <para>kanji and description can be empty strings</para>
         /// </summary>
         public void Update(String updateString)
@@ -332,7 +332,8 @@ namespace JapanischTrainer.Database
             kana        = parts[1];
             kanji       = parts[2] == "" ? null : parts[2];
             translation = parts[3];
-            description = parts[4] == "" ? null : parts[4]; ;
+            description = parts[4] == "" ? null : parts[4];
+            type        = StringToType(parts[5]);
         }
 
         /// <summary>
