@@ -31,11 +31,10 @@ namespace JapanischTrainer.Pages
         {
             get
             {
-                if (currKanjiIndex == 0)
-                {
-                    return AppData.Kanjis.Length - 1;
-                }
-                return currKanjiIndex - 1;
+                //if i add the length of the kanjis array to the current index, the current index can be 0 
+                //so that current index - 1 = -1 but i anyway get the last index in the array and don't be
+                //out of range, and all with no if clause :3 
+                return (AppData.Kanjis.Length + currKanjiIndex - 1) % AppData.Kanjis.Length;
             }
         }
 

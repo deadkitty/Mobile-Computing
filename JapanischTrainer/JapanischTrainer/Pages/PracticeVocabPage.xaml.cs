@@ -89,7 +89,6 @@ namespace JapanischTrainer.Pages
             if (VocabData.WrongAnsweredWords.Count > 0)
             {
                 VocabController.LearnWrongWords();
-                VocabController.GetNext();
 
                 UpdateView();
             }
