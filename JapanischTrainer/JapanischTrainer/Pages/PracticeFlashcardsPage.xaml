@@ -19,17 +19,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
-        <Controls:DetailKanjiItem Name="detailKanjiItem" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-        <!--<Button Name="correctButton" Content="Richtig" Foreground="Black" Grid.Row="1" Grid.Column="0" Background="#FF39F798" Click="correctButton_Click"/>
-        <Button Name="wrongButton"   Content="Falsch"  Foreground="Black" Grid.Row="1" Grid.Column="1" Background="#FFFF7171" Click="wrongButton_Click"/>-->
+        <ScrollViewer Grid.Row="0">
+            <Controls:DetailKanjiItem Name="detailKanjiItem"/>
+        </ScrollViewer>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>

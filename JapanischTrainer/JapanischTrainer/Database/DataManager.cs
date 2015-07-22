@@ -233,7 +233,7 @@ namespace JapanischTrainer.Database
         /// <returns>result string with edited/added lessons/words</returns>
         public static String UpdateDatabase(IRandomAccessStream updateStream)
         {
-            String updateResults = "";
+            StringBuilder updateResults = new StringBuilder();
 
             using (StreamReader sr = new StreamReader(updateStream.AsStream()))
             {
@@ -242,124 +242,192 @@ namespace JapanischTrainer.Database
 
                 if (dbVersion <= AppSettings.DatabaseVersion)
                 {
-                    updateResults = "Update fehlgeschlagen!";
-                    updateResults += "\nDatenbankversion der Updatedatei ist zu niedrig!\n";
-                    updateResults += "\nAktuelle Datenbankversion: " + AppSettings.DatabaseVersion;
-                    updateResults += "\nUpdate-Dateiversion: " + dbVersion;
+                    updateResults.AppendLine("Update fehlgeschlagen!");
+                    updateResults.AppendLine("Datenbankversion der Updatedatei ist zu niedrig!\n");
+                    updateResults.AppendLine("Aktuelle Datenbankversion: " + AppSettings.DatabaseVersion);
+                    updateResults.AppendLine("Update-Dateiversion: " + dbVersion);
                 }
                 else
                 {
-                    //update lessons
-                    line = sr.ReadLine();
-                    int count = Convert.ToInt32(line);
+                    int count = 0;
 
-                    for (int i = 0; i < count; ++i)
+                    //update lessons
+                    try
                     {
                         line = sr.ReadLine();
-                        String idStr = line.Substring(0, line.IndexOf('|'));
-                        Lesson l = context.GetLesson(Convert.ToInt32(idStr));
-                        l.Update(line);
-                    }
+                        count = Convert.ToInt32(line);
 
-                    updateResults += "Geänderte Lektionen: " + count + "\n";
+                        for (int i = 0; i < count; ++i)
+                        {
+                            line = sr.ReadLine();
+                            String idStr = line.Substring(0, line.IndexOf('|'));
+                            Lesson l = context.GetLesson(Convert.ToInt32(idStr));
+                            l.Update(line);
+                        }
+
+                        updateResults.AppendLine("Geänderte Lektionen: " + count);
+                    }
+                    catch (Exception e)
+                    {
+                        updateResults.Clear();
+                        updateResults.AppendLine("Update fehlgeschlagen beim Lektionen Updaten!");
+                        updateResults.AppendLine("System: " + e.Message);
+
+                        return updateResults.ToString();
+                    }
 
                     //update words
-                    line = sr.ReadLine();
-                    count = Convert.ToInt32(line);
-
-                    for (int i = 0; i < count; ++i)
+                    try
                     {
                         line = sr.ReadLine();
-                        String idStr = line.Substring(0, line.IndexOf('|'));
-                        Word w = context.GetWord(Convert.ToInt32(idStr));
-                        w.Update(line);
+                        count = Convert.ToInt32(line);
+
+                        for (int i = 0; i < count; ++i)
+                        {
+                            line = sr.ReadLine();
+                            String idStr = line.Substring(0, line.IndexOf('|'));
+                            Word w = context.GetWord(Convert.ToInt32(idStr));
+                            w.Update(line);
+                        }
+
+                        updateResults.AppendLine("Geänderte Wörter: " + count);
+
+                    }
+                    catch (Exception e)
+                    {
+                        updateResults.Clear();
+                        updateResults.AppendLine("Update fehlgeschlagen beim Wörter Updaten!");
+                        updateResults.AppendLine("System: " + e.Message);
+
+                        return updateResults.ToString();
                     }
 
-                    updateResults += "Geänderte Wörter: " + count + "\n";
-
                     //add new Lessons
+
                     line = sr.ReadLine();
                     count = Convert.ToInt32(line);
 
                     Lesson[] newLessons = new Lesson[count];
-                    for (int i = 0; i < count; ++i)
+
+                    try
                     {
-                        ++AppSettings.LastLessonID;
+                        for (int i = 0; i < count; ++i)
+                        {
+                            ++AppSettings.LastLessonID;
 
-                        line = sr.ReadLine();
+                            line = sr.ReadLine();
 
-                        newLessons[i] = new Lesson(line);
-                        newLessons[i].id = AppSettings.LastLessonID;
+                            newLessons[i] = new Lesson(line);
+                            newLessons[i].id = AppSettings.LastLessonID;
+                        }
+
+                        updateResults.AppendLine("Hinzugefügte Lektionen: " + count);
                     }
+                    catch (Exception e)
+                    {
+                        updateResults.Clear();
+                        updateResults.AppendLine("Update fehlgeschlagen beim einfügen neuer Lektionen!");
+                        updateResults.AppendLine("System: " + e.Message);
 
-                    updateResults += "Hinzugefügte Lektionen: " + count + "\n";
+                        --AppSettings.LastLessonID;
 
-                    int wordsCount = 0;
-                    int sentenceCount = 0;
-                    int kanjiCount = 0;
+                        return updateResults.ToString();
+                    }
 
                     //add lesson items
-                    foreach (Lesson newLesson in newLessons)
+                    try
                     {
-                        switch ((Lesson.EType)newLesson.type)
+                        int wordsCount = 0;
+                        int sentenceCount = 0;
+                        int kanjiCount = 0;
+
+                        foreach (Lesson newLesson in newLessons)
                         {
-                            case Lesson.EType.vocabulary:
+                            switch ((Lesson.EType)newLesson.type)
+                            {
+                                case Lesson.EType.vocabulary:
 
-                                Word[] newWords = new Word[newLesson.size];
+                                    Word[] newWords = new Word[newLesson.size];
 
-                                for (int i = 0; i < newLesson.size; ++i)
-                                {
-                                    line = sr.ReadLine();
-                                    newWords[i] = new Word(line, newLesson.id);
-                                }
-                                wordsCount += newLesson.size;
+                                    for (int i = 0; i < newLesson.size; ++i)
+                                    {
+                                        line = sr.ReadLine();
+                                        newWords[i] = new Word(line, newLesson.id);
+                                    }
+                                    wordsCount += newLesson.size;
 
-                                context.words.InsertAllOnSubmit(newWords);
+                                    context.words.InsertAllOnSubmit(newWords);
 
-                                break;
+                                    break;
 
-                            case Lesson.EType.conjugation: 
-                                
-                                break;
+                                case Lesson.EType.conjugation:
 
-                            case Lesson.EType.insert:
+                                    break;
 
-                                Sentence[] newSentences = new Sentence[newLesson.size];
-                                
-                                for (int i = 0; i < newLesson.size; ++i)
-                                {
-                                    line = sr.ReadLine();
-                                    newSentences[i] = new Sentence(line, newLesson.id);
-                                }
-                                sentenceCount += newLesson.size;
+                                case Lesson.EType.insert:
 
-                                context.sentences.InsertAllOnSubmit(newSentences);
+                                    Sentence[] newSentences = new Sentence[newLesson.size];
 
-                                break;
+                                    for (int i = 0; i < newLesson.size; ++i)
+                                    {
+                                        line = sr.ReadLine();
+                                        newSentences[i] = new Sentence(line, newLesson.id);
+                                    }
+                                    sentenceCount += newLesson.size;
 
-                            case Lesson.EType.kanji:
+                                    context.sentences.InsertAllOnSubmit(newSentences);
 
-                                Kanji[] newKanji = new Kanji[newLesson.size];
+                                    break;
 
-                                for (int i = 0; i < newLesson.size; ++i)
-                                {
-                                    line = sr.ReadLine();
-                                    newKanji[i] = new Kanji(line, newLesson.id);
-                                }
-                                kanjiCount += newLesson.size;
+                                case Lesson.EType.kanji:
 
-                                context.kanjis.InsertAllOnSubmit(newKanji);
-                                
-                                break;
+                                    Kanji[] newKanji = new Kanji[newLesson.size];
+
+                                    for (int i = 0; i < newLesson.size; ++i)
+                                    {
+                                        line = sr.ReadLine();
+                                        newKanji[i] = new Kanji(line, newLesson.id);
+                                    }
+                                    kanjiCount += newLesson.size;
+
+                                    context.kanjis.InsertAllOnSubmit(newKanji);
+
+                                    break;
+                            }
                         }
+
+                        updateResults.AppendLine("Hinzugefügte Wörter: " + wordsCount);
+                        updateResults.AppendLine("Hinzugefügte Lückentexte: " + sentenceCount);
+                        updateResults.AppendLine("Hinzugefügte Kanji: " + kanjiCount);
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        updateResults.Clear();
+                        updateResults.AppendLine("Update fehlgeschlagen beim einfügen neuer Items!");
+                        updateResults.AppendLine("System: " + e.Message);
+                        updateResults.AppendLine("vermutlich weil Trennstrich '|' vergessen.");
+
+                        return updateResults.ToString();
+                    }
+                    catch (FormatException e)
+                    {
+                        updateResults.Clear();
+                        updateResults.AppendLine("Update fehlgeschlagen beim einfügen neuer Items!");
+                        updateResults.AppendLine("System: " + e.Message);
+                        updateResults.AppendLine("vermutlich weil Zahlen Syntax nich stimmt.");
+
+                        return updateResults.ToString();
+                    }
+                    catch (Exception e)
+                    {
+                        updateResults.Clear();
+                        updateResults.AppendLine("Update fehlgeschlagen beim einfügen neuer Items!");
+                        updateResults.AppendLine("System: " + e.Message);
+
+                        return updateResults.ToString();
                     }
 
-                    updateResults += "Hinzugefügte Wörter: " + wordsCount + "\n";
-                    updateResults += "Hinzugefügte Lückentexte: " + sentenceCount + "\n";
-                    updateResults += "Hinzugefügte Kanji: " + kanjiCount + "\n";
-
                     context.lessons.InsertAllOnSubmit(newLessons);
-
                     context.SubmitChanges();
                     
                     AppSettings.DatabaseVersion = dbVersion;
@@ -367,7 +435,7 @@ namespace JapanischTrainer.Database
                 }
             }
 
-            return updateResults;
+            return updateResults.ToString();
         }
 
         public static String ExportDatabase(IRandomAccessStream exportStream)

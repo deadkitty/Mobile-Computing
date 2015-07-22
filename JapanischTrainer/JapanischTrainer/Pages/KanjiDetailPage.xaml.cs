@@ -63,9 +63,9 @@ namespace JapanischTrainer.Pages
 
             kanjiItems = new DetailKanjiItem[]
             {
-                (items[0].Content as Grid).Children[0] as DetailKanjiItem,
-                (items[1].Content as Grid).Children[0] as DetailKanjiItem,
-                (items[2].Content as Grid).Children[0] as DetailKanjiItem,
+                kanjiItem0,
+                kanjiItem1,
+                kanjiItem2,
             };
         }
         

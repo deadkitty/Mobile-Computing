@@ -21,20 +21,26 @@
             <!--Pivot-Element 1-->
             <controls:PivotItem Margin="0,-10,0,0">
                 <Grid xmlns:src="clr-namespace:JapanischTrainer.Pages.Controls" Margin="0">
-                    <src:DetailKanjiItem Grid.Row="0"/>
+                    <ScrollViewer>
+                        <src:DetailKanjiItem Name="kanjiItem0"/>
+                    </ScrollViewer>
                 </Grid>
             </controls:PivotItem>
 
             <!--Pivot-Element 2-->
             <controls:PivotItem Margin="0,-10,0,0">
                 <Grid xmlns:src="clr-namespace:JapanischTrainer.Pages.Controls" Margin="0">
-                    <src:DetailKanjiItem Grid.Row="0"/>
+                    <ScrollViewer>
+                        <src:DetailKanjiItem Name="kanjiItem1"/>
+                    </ScrollViewer>
                 </Grid>
             </controls:PivotItem>
             <!--Pivot-Element 3-->
             <controls:PivotItem Margin="0,-10,0,0">
                 <Grid xmlns:src="clr-namespace:JapanischTrainer.Pages.Controls" Margin="0">
-                    <src:DetailKanjiItem Grid.Row="0" HorizontalAlignment="Left" Margin="0" Width="480"/>
+                    <ScrollViewer>
+                        <src:DetailKanjiItem Name="kanjiItem2"/>
+                    </ScrollViewer>
                 </Grid>
             </controls:PivotItem>
         </controls:Pivot>

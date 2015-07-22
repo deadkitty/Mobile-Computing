@@ -18,6 +18,8 @@ namespace JapanischTrainer.Pages
         private int rowCount;
         private int lastRowEmptyFieldsCount;
 
+        //loaded flag to know that the kanjis are already in the grid, otherwise if i come back to this side
+        //the page will try to add new grids for the kanjis every time
         private bool loaded = false;
 
         public SelectKanjiPage()

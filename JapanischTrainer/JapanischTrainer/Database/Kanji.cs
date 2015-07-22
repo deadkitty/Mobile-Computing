@@ -96,6 +96,11 @@ namespace JapanischTrainer.Database
             this.lessonID = setID;
         }
 
+        public override string ToString()
+        {
+            return kanji + " - " + meaning + " - " + onyomi + " - " + kunyomi;
+        }
+
         public String ToExportString()
         {
             StringBuilder sb = new StringBuilder();
