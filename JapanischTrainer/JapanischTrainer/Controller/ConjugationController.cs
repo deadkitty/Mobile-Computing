@@ -179,6 +179,10 @@ namespace JapanischTrainer.Controller
 
         private static String GetTargetWord(String sourceWord, Word.EType sourceWordType, ConjugationData.ETargetForm targetForm)
         {
+            //before i conjugate the wort into the target form i first bring the word from the masu into the ru form
+            //the thing is, normaly the word whould already be in ru form but i saved all verbs in masu form
+            //so i just convert them at the begining, later i will convert all verbs into the ru form before so
+            //i don't have do convert it here
             sourceWord = GetRuVerb(sourceWord, sourceWordType);
 
             switch (targetForm)
