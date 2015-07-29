@@ -287,6 +287,10 @@ namespace JapanischTrainer.Database
                             line = sr.ReadLine();
                             String idStr = line.Substring(0, line.IndexOf('|'));
                             Word w = context.GetWord(Convert.ToInt32(idStr));
+
+                            AppSettings.TimeStamp = Math.Max(AppSettings.TimeStamp, w.TimeStampTransl);
+                            AppSettings.TimeStamp = Math.Max(AppSettings.TimeStamp, w.TimeStampJapanese);
+
                             w.Update(line);
                         }
 
@@ -353,6 +357,9 @@ namespace JapanischTrainer.Database
                                     {
                                         line = sr.ReadLine();
                                         newWords[i] = new Word(line, newLesson.id);
+
+                                        AppSettings.TimeStamp = Math.Max(AppSettings.TimeStamp, newWords[i].TimeStampTransl);
+                                        AppSettings.TimeStamp = Math.Max(AppSettings.TimeStamp, newWords[i].TimeStampJapanese);
                                     }
                                     wordsCount += newLesson.size;
 
