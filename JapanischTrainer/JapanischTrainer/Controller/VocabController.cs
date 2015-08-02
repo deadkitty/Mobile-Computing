@@ -11,46 +11,26 @@ namespace JapanischTrainer.Controller
 {
     public static class VocabController
     {
-        #region Fields
-
-        private static int partLessonStartIndex = 0;
-
-        private static int lastItemIndex = 0;
-        private static int lastItemsCorrect = 0;
-        private static int lastItemsWrong = 0;
-
-        private static bool wrongAnswersRound = false;
-        
-        #endregion
-
         #region Public Methods
 
-        #region Prepare Lessons
+        #region Initialize
 
         public static void LoadLessons(Lesson[] lessons)
         {
-            VocabData.Lessons = lessons;
+            DataManager.LoadWords(lessons, Util.ExtractTypes(AppSettings.LoadOptions));
 
             LoadLessons();
-
-            if (AppSettings.PartLessons)
-            {
-                VocabData.WordsTemp = VocabData.Words;
-                LoadNextPart();
-            }
-            else
-            {
-                VocabData.ItemsCorrect = 0;
-                VocabData.ItemsWrong = 0;
-                VocabData.ItemsLeft = VocabData.Words.Length;
-
-                VocabData.ItemIndex = 0;
-            }
         }
 
         private static void LoadLessons()
         {
-            DataManager.LoadWords(VocabData.Lessons, Util.ExtractTypes(AppSettings.LoadOptions));
+            VocabData.         Words.Clear();
+            VocabData.  CorrectWords.Clear();
+            VocabData.IncorrectWords.Clear();
+            
+            VocabData.ItemsWrong = 0;
+
+            PrepareWords();
 
             switch (AppSettings.WordPracticeMethod)
             {
@@ -59,55 +39,70 @@ namespace JapanischTrainer.Controller
                 case 2: FilterJapaneseWords(); break;
             }
 
-            //From now i only work on VocabData.Words, so i don't need AppData.Words any longer
-            AppData.Words = null;
-
             switch (AppSettings.SortOrder)
             {
-                case 0: Util.SortByRandom              (VocabData.Words);        //sort by random first because after all wrong words there would be only words left with no wrong answers and it would 
-                        Util.SortByCorrectWrongRelation(VocabData.Words); break; //always be the same pattern then, ger word1, jap word1, ger word2, jap word2, ... so i mix them once at the beginning ;D
+                case 0: Util.SortByRandom              (VocabData.Words);        //sort by random first because words with the same CorrectWrongRelation aren't mixed and it would always be the
+                        Util.SortByCorrectWrongRelation(VocabData.Words); break; //same pattern then, ger word1, jap word1, ger word2, jap word2, ... so i mix them once at the beginning ;D
                 case 1: Util.SortByTimeStamp           (VocabData.Words); break;
-                case 2: /*Allready Sorted By Lesson*/                     break;
+                case 2: /*          Allready Sorted By Lesson          */ break;
                 case 3: Util.SortByRandom              (VocabData.Words); break;
+            }
+            
+            GetNext();
+        }
+
+        private static void PrepareWords()
+        {
+            foreach(Word w in AppData.Words)
+            {
+                //if i don't set these here in the next round, answerstate will still be set to "both"
+                switch (AppSettings.WordPracticeMethod)
+                {
+                    case 0:
+                        
+                        w.showJWord = Convert.ToBoolean(Util.GetRandomNumber(2));
+                        w.answerState = Word.EAnswerState.none;
+                        
+                        break;
+
+                    case 1:
+
+                        w.showJWord = false;
+                        w.answerState = Word.EAnswerState.japanese;
+                        
+                        break;
+
+                    case 2:
+
+                        w.showJWord = true;
+                        w.answerState = Word.EAnswerState.translation;
+                        
+                        break;
+                }
             }
         }
 
         private static void FilterWords()
         {
-            if (AppSettings.LoadAllWords)
+            if(AppSettings.LoadAllWords)
             {
-                VocabData.Words = new Word[AppData.Words.Length * 2];
-
-                //i have to add each word manually, otherwise the original pointer and showJWord members are not set
-                int j = 0;
-                for (int i = 0; i < AppData.Words.Length; ++i)
-                {
-                    VocabData.Words[j++] = AppData.Words[i];
-                    Word cpy = new Word(AppData.Words[i]);
-                    cpy.showJWord = true;
-                    VocabData.Words[j++] = cpy;
-                }
+                VocabData.Words.AddRange(AppData.Words);
+                VocabData.Words.AddRange(AppData.Words);
             }
             else
             {
-                List<Word> words = new List<Word>();
-
-                foreach (Word w in AppData.Words)
+                foreach(Word w in AppData.Words)
                 {
                     if (w.CorrectWrongCountTranslation < AppSettings.MinimumWordCount || w.CorrectWrongRelationTranslation < AppSettings.CorrectWrongRelation)
                     {
-                        words.Add(w);
+                        VocabData.Words.Add(w);
                     }
 
                     if (w.CorrectWrongCountJapanese < AppSettings.MinimumWordCount || w.CorrectWrongRelationJapanese < AppSettings.CorrectWrongRelation)
                     {
-                        Word cpy = new Word(w);
-                        cpy.showJWord = true;
-                        words.Add(cpy);
+                        VocabData.Words.Add(w);
                     }
                 }
-
-                VocabData.Words = words.ToArray();
             }
         }
 
@@ -115,21 +110,17 @@ namespace JapanischTrainer.Controller
         {
             if (AppSettings.LoadAllWords)
             {
-                VocabData.Words = AppData.Words;
+                VocabData.Words.AddRange(AppData.Words);
             }
             else
             {
-                List<Word> words = new List<Word>();
-
                 foreach (Word w in AppData.Words)
                 {
                     if (w.CorrectWrongCountTranslation < AppSettings.MinimumWordCount || w.CorrectWrongRelationTranslation < AppSettings.CorrectWrongRelation)
                     {
-                        words.Add(w);
+                        VocabData.Words.Add(w);
                     }
                 }
-
-                VocabData.Words = words.ToArray();
             }
         }
 
@@ -137,186 +128,113 @@ namespace JapanischTrainer.Controller
         {
             if (AppSettings.LoadAllWords)
             {
-                VocabData.Words = new Word[AppData.Words.Length];
-
-                //i have to add each word manually, otherwise the original pointer and showJWord members are not set
-                for (int i = 0; i < AppData.Words.Length; ++i)
-                {
-                    VocabData.Words[i] = AppData.Words[i];
-                    VocabData.Words[i].showJWord = true;
-                }
+                VocabData.Words.AddRange(AppData.Words);
             }
             else
             {
-                List<Word> words = new List<Word>();
-
                 foreach (Word w in AppData.Words)
                 {
                     if (w.CorrectWrongCountJapanese < AppSettings.MinimumWordCount || w.CorrectWrongRelationJapanese < AppSettings.CorrectWrongRelation)
                     {
-                        w.showJWord = true;
-                        words.Add(w);
+                        VocabData.Words.Add(w);
                     }
                 }
-
-                VocabData.Words = words.ToArray();
             }
         }
 
         public static void Deinitialize()
         {
-            VocabData.Words      = null;
-            VocabData.WordsTemp  = null;
-            VocabData.Lessons    = null;
+            VocabData.Words.Clear();
+            VocabData.CorrectWords.Clear();
+            VocabData.IncorrectWords.Clear();
 
-            VocabData.WrongAnsweredWords.Clear();
+            AppData.Words = null;
         }
-        
+           
         #endregion
 
         #region Practice
 
         private static void StartNewRound()
         {
-            if(VocabData.WrongAnsweredWords.Count > 0)
+            if (VocabData.IncorrectWords.Count > 0)
             {
-                VocabData.WordsTemp = VocabData.Words;
-                VocabData.Words = VocabData.WrongAnsweredWords.ToArray();
-                VocabData.WrongAnsweredWords.Clear();
+                VocabData.Words.AddRange(VocabData.IncorrectWords);
+                VocabData.IncorrectWords.Clear();
+
+                Util.SortByRandom(VocabData.Words);
+
+                FillTextProperties();
             }
             else
             {
                 LoadLessons();
             }
-
-            VocabData.ItemsCorrect = 0;
-            VocabData.ItemsWrong = 0;
-            VocabData.ItemsLeft = VocabData.Words.Length;
-
-            VocabData.ItemIndex = 0;
         }
 
         /// <summary>
-        /// saves the current practice state where the user
-        /// pressed the learnWrongAnsweresButton and 
-        /// starts a new Round with all wrong answered words so far
+        /// Takes the Wrong Words by now and inserts them at the begining of the Words List again
         /// </summary>
         public static void LearnWrongWords()
         {
-            lastItemIndex = VocabData.ItemIndex;
-            VocabData.ItemIndex = 0;
+            Util.SortByRandom(VocabData.IncorrectWords);
 
-            lastItemsCorrect = VocabData.ItemsCorrect;
-            lastItemsWrong = VocabData.ItemsWrong;
-
-            VocabData.ItemsCorrect = 0;
-            VocabData.ItemsWrong = 0;
-
-            VocabData.WordsTemp = VocabData.Words;
-
-            VocabData.Words = VocabData.WrongAnsweredWords.ToArray();
-
-            VocabData.WrongAnsweredWords.Clear();
-
-            VocabData.ItemsLeft = VocabData.Words.Length;
-
-            wrongAnswersRound = true;
-        }
-
-        /// <summary>
-        /// recoves the last practice state after the user
-        /// has pressed the learnWrongAnsweresButton and ended all words in the 
-        /// wrongAnsweredWords List
-        /// </summary>
-        private static void RecoverOldPracticeState()
-        {
-            wrongAnswersRound = false;
-
-            VocabData.Words = VocabData.WordsTemp;
-            VocabData.ItemIndex = lastItemIndex - 1;
-
-            VocabData.ItemsCorrect += lastItemsCorrect;
-
-            VocabData.ItemsLeft = VocabData.Words.Length - VocabData.ItemIndex;
-        }
-
-        /// <summary>
-        /// loads the next couple words
-        /// </summary>
-        private static void LoadNextPart()
-        {
-            if (VocabData.WrongAnsweredWords.Count > 0)
+            foreach(Word w in VocabData.IncorrectWords)
             {
-                VocabData.Words = VocabData.WrongAnsweredWords.ToArray();
-                VocabData.WrongAnsweredWords.Clear();
-            }
-            else
-            {
-                if (partLessonStartIndex >= VocabData.WordsTemp.Length)
+                if(w.answerState == Word.EAnswerState.none)
                 {
-                    partLessonStartIndex = 0;
-                    LoadLessons();
+                    w.showJWord = !w.showJWord;
                 }
-
-                VocabData.Words = new Word[Math.Min(AppSettings.PartLessonWordsCount, VocabData.WordsTemp.Length - partLessonStartIndex)];
-
-                for (int i = 0; i < VocabData.Words.Length; ++i)
-                {
-                    VocabData.Words[i] = VocabData.WordsTemp[partLessonStartIndex + i];
-                }
-
-                partLessonStartIndex += VocabData.Words.Length;
             }
-            
-            VocabData.ItemsCorrect = 0;
-            VocabData.ItemsWrong = 0;
-            VocabData.ItemsLeft = VocabData.Words.Length;
 
-            VocabData.ItemIndex = 0;
+            VocabData.Words.InsertRange(0, VocabData.IncorrectWords);
+
+            VocabData.IncorrectWords.Clear();
+
+            FillTextProperties();
         }
-        
+                
         public static void WordCorrect()
         {
-            VocabData.ItemsLeft--;
-            VocabData.ItemsCorrect++;
-
             if (VocabData.ActiveWord.showJWord)
             {
-                if(VocabData.ActiveWord.original != null)
-                {
-                    VocabData.ActiveWord.original.correctJapanese++;
-                    VocabData.ActiveWord.original.TimeStampJapanese = ++AppSettings.TimeStamp;
-                }
-                else
-                {
-                    VocabData.ActiveWord.correctJapanese++;
-                    VocabData.ActiveWord.TimeStampJapanese = ++AppSettings.TimeStamp;
-                }
+                VocabData.ActiveWord.correctJapanese++;
+                VocabData.ActiveWord.TimeStampJapanese = ++AppSettings.TimeStamp;
             }
             else
             {
                 VocabData.ActiveWord.correctTranslation++;
                 VocabData.ActiveWord.timeStampTransl = ++AppSettings.TimeStamp;
             }
+
+            if(VocabData.ActiveWord.answerState == Word.EAnswerState.none)
+            {
+                if (VocabData.ActiveWord.showJWord)
+                {
+                    VocabData.ActiveWord.answerState = Word.EAnswerState.japanese;
+                }
+                else
+                {
+                    VocabData.ActiveWord.answerState = Word.EAnswerState.translation;
+                }
+
+                VocabData.ActiveWord.showJWord = !VocabData.ActiveWord.showJWord;
+            }
+            else
+            {
+                VocabData.ActiveWord.answerState = Word.EAnswerState.both;
+            }
+            
+            VocabData.CorrectWords.Add(VocabData.ActiveWord);
+            VocabData.Words.Remove(VocabData.ActiveWord);
         }
 
         public static void WordWrong()
         {
-            VocabData.ItemsLeft--;
-            VocabData.ItemsWrong++;
-
             if (VocabData.ActiveWord.showJWord)
             {
-                if (VocabData.ActiveWord.original != null)
-                {
-                    VocabData.ActiveWord.original.wrongJapanese++;
-                    VocabData.ActiveWord.original.TimeStampJapanese = ++AppSettings.TimeStamp;
-                }
-                else
-                {
-                    VocabData.ActiveWord.wrongJapanese++;
-                    VocabData.ActiveWord.TimeStampJapanese = ++AppSettings.TimeStamp;
-                }
+                VocabData.ActiveWord.wrongJapanese++;
+                VocabData.ActiveWord.TimeStampJapanese = ++AppSettings.TimeStamp;
             }
             else
             {
@@ -324,42 +242,80 @@ namespace JapanischTrainer.Controller
                 VocabData.ActiveWord.timeStampTransl = ++AppSettings.TimeStamp;
             }
 
-            VocabData.WrongAnsweredWords.Add(VocabData.ActiveWord);
+            if(VocabData.ActiveWord.answerState == Word.EAnswerState.none)
+            {
+                VocabData.ActiveWord.showJWord = !VocabData.ActiveWord.showJWord;
+            }
+
+            VocabData.ItemsWrong++;
+
+            VocabData.IncorrectWords.Add(VocabData.ActiveWord);
+            VocabData.Words.Remove(VocabData.ActiveWord);
+
+            if(AppSettings.LearnWrongWords)
+            {
+                if(VocabData.IncorrectWords.Count == AppSettings.LearnWrongWordsCount)
+                {
+                    LearnWrongWords();
+                }
+            }
         }
 
         public static void GetNext()
         {
-            if(VocabData.ItemsLeft == 0)
+            if(VocabData.Words.Count == 0)
             {
                 DataManager.UpdateProgress();
-                
-                if(AppSettings.PartLessons)
+
+                StartNewRound();
+            }
+            else
+            {
+                FillTextProperties();
+            }
+        }
+        
+        private static void FillTextProperties()
+        {
+            if (VocabData.ActiveWord.showJWord)
+            {
+                if (VocabData.ActiveWord.kanji == null)
                 {
-                    LoadNextPart();
+                    VocabData.ShownText = VocabData.ActiveWord.kana;
+                    VocabData.AnswerText = VocabData.ActiveWord.translation;
                 }
                 else
                 {
-                    if (wrongAnswersRound)
-                    {
-                        RecoverOldPracticeState();
-                    }
-                    else
-                    {
-                        StartNewRound();
-                    }    
+                    VocabData.ShownText = VocabData.ActiveWord.kanji;
+                    VocabData.AnswerText = VocabData.ActiveWord.kana + ",\n" + VocabData.ActiveWord.translation;
                 }
             }
             else
             {
-                ++VocabData.ItemIndex;
-                
-                if (VocabData.ItemIndex % 50 == 49)
+                VocabData.ShownText = VocabData.ActiveWord.translation;
+
+                if (VocabData.ActiveWord.kanji == null)
                 {
-                    DataManager.UpdateProgress();
+                    VocabData.AnswerText = VocabData.ActiveWord.kana;
+                }
+                else
+                {
+                    VocabData.AnswerText = VocabData.ActiveWord.kanji + ",\n" + VocabData.ActiveWord.kana;
+                }
+            }
+
+            if (AppSettings.ShowDescription)
+            {
+                switch (VocabData.ActiveWord.showFlags)
+                {
+                    case 0:                                      VocabData.DescriptionText = ""                                        ; break;
+                    case 1: if (!VocabData.ActiveWord.showJWord) VocabData.DescriptionText = VocabData.ActiveWord.ToDescriptionString(); break;
+                    case 2: if ( VocabData.ActiveWord.showJWord) VocabData.DescriptionText = VocabData.ActiveWord.ToDescriptionString(); break;
+                    case 3:                                      VocabData.DescriptionText = VocabData.ActiveWord.ToDescriptionString(); break;
                 }
             }
         }
-        
+
         #endregion
 
         #endregion

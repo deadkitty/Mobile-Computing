@@ -189,6 +189,8 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings\AppSettings.cs" />
+    <Compile Include="Util\AppStreamReader.cs" />
+    <Compile Include="Util\AppStreamWriter.cs" />
     <Compile Include="Util\Util.cs" />
   </ItemGroup>
   <ItemGroup>

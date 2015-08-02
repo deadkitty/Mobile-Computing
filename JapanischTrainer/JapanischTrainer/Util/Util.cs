@@ -19,11 +19,11 @@ namespace JapanischTrainer
         #region Public Methods
 
         #region Sort Arrays
-
-        public static void SortByCorrectWrongRelation(Word[] words)
+        
+        public static void SortByCorrectWrongRelation(List<Word> words)
         {
             //get relations for both, japanese word and translation and mix them in one array
-            float[] correctWrongRelations = new float[words.Length];
+            float[] correctWrongRelations = new float[words.Count];
 
             for (int i = 0; i < correctWrongRelations.Length; ++i)
             {
@@ -39,23 +39,28 @@ namespace JapanischTrainer
 
             //after this, sort these relations array and make every step for both
             //the relations array and the Words array
-            for (int i = 0; i < words.Length - 1; ++i)
+            for (int i = 0; i < words.Count - 1; ++i)
             {
-                for (int j = i + 1; j < words.Length; ++j)
+                for (int j = i + 1; j < words.Count; ++j)
                 {
                     if (correctWrongRelations[i] > correctWrongRelations[j])
                     {
                         Swap(ref correctWrongRelations[i], ref correctWrongRelations[j]);
-                        Swap(ref words[i], ref words[j]);
+
+                        Word hv = words[i];
+                        words[i] = words[j];
+                        words[j] = hv;
+
+                        //Swap(ref words[i], ref words[j]);
                     }
                 }
             }
         }
 
-        public static void SortByTimeStamp(Word[] words)
+        public static void SortByTimeStamp(List<Word> words)
         {
             //get timestamps for both, japanese word and translation and mix them in one array
-            int[] timeStamps = new int[words.Length];
+            int[] timeStamps = new int[words.Count];
 
             for (int i = 0; i < timeStamps.Length; ++i)
             {
@@ -71,26 +76,44 @@ namespace JapanischTrainer
 
             //after this, sort these timestamp array and make every step for both
             //the timestamp array and the Words array
-            for (int i = 0; i < words.Length - 1; ++i )
+            for (int i = 0; i < words.Count - 1; ++i )
             {
-                for(int j = i + 1; j < words.Length; ++j)
+                for(int j = i + 1; j < words.Count; ++j)
                 {
                     if(timeStamps[i] > timeStamps[j])
                     {
                         Swap(ref timeStamps[i], ref timeStamps[j]);
-                        Swap(ref words[i], ref words[j]);
+
+                        Word hv = words[i];
+                        words[i] = words[j];
+                        words[j] = hv;
+
+                        //Swap(ref words[i], ref words[j]);
                     }
                 }
+            }
+        }
+        
+        public static void SortByRandom<Type>(List<Type> values)
+        {
+            for (int i = 0; i < values.Count; ++i)
+            {
+                int newIndex = GetRandomNumber(values.Count);
+
+                Type hv = values[i];
+                values[i] = values[newIndex];
+                values[newIndex] = hv;
+
+                //swap with ref parameters doesn't work here, don't know why =(
+                //Swap(ref values[i], ref values[newIndex]);
             }
         }
 
         public static void SortByRandom<Type>(Type[] values)
         {
-            Random rand = new Random();
-
             for (int i = 0; i < values.Length; ++i)
             {
-                int newIndex = rand.Next(values.Length);
+                int newIndex = GetRandomNumber(values.Length);
 
                 Swap(ref values[i], ref values[newIndex]);
             }

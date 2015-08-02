@@ -11,74 +11,78 @@ namespace JapanischTrainer.Data
     {
         #region Fields
 
-        private static int itemsCorrect = 0;
-        private static int itemsLeft = 0;
-        private static int itemsWrong = 0;
+        private static String shownText;
+        private static String answerText;
+        private static String descriptionText;
+        
+        private static List<Word> activeWords    = new List<Word>();
+        private static List<Word> correctWords   = new List<Word>();
+        private static List<Word> incorrectWords = new List<Word>();
 
-        private static int itemIndex = 0;
-
-        private static Word[] words;
-        private static Word[] wordsTemp;
-
-        private static Lesson[] lessons;
-
-        private static List<Word> wrongAnsweredWords = new List<Word>();
+        private static int wrongAnswers;
 
         #endregion
 
         #region Properties
-
+        
         public static Word ActiveWord
         {
-            get { return words[itemIndex]; }
+            get { return activeWords[0]; }
         }
 
-        public static Word[] Words
+
+        public static List<Word> Words
         {
-            get { return words; }
-            set { words = value; }
+            get { return activeWords; }
+            set { activeWords = value; }
         }
 
-        public static Word[] WordsTemp
+        public static List<Word> CorrectWords
         {
-            get { return wordsTemp; }
-            set { wordsTemp = value; }
+            get { return correctWords; }
+            set { correctWords = value; }
         }
 
-        public static Lesson[] Lessons
+        public static List<Word> IncorrectWords
         {
-            get { return lessons; }
-            set { lessons = value; }
+            get { return incorrectWords; }
+            set { incorrectWords = value; }
         }
 
-        public static List<Word> WrongAnsweredWords
-        {
-            get { return wrongAnsweredWords; }
-            set { wrongAnsweredWords = value; }
-        }
 
         public static int ItemsLeft
         {
-            get { return itemsLeft; }
-            set { itemsLeft = value; }
+            get { return activeWords.Count + incorrectWords.Count; }
         }
 
         public static int ItemsCorrect
         {
-            get { return itemsCorrect; }
-            set { itemsCorrect = value; }
+            get { return correctWords.Count; }
         }
 
         public static int ItemsWrong
         {
-            get { return itemsWrong; }
-            set { itemsWrong = value; }
+            get { return wrongAnswers; }
+            set { wrongAnswers = value; }
         }
 
-        public static int ItemIndex
+
+        public static String ShownText
         {
-            get { return itemIndex; }
-            set { itemIndex = value; }
+            get { return shownText; }
+            set { shownText = value; }
+        }
+
+        public static String AnswerText
+        {
+            get { return answerText; }
+            set { answerText = value; }
+        }
+
+        public static String DescriptionText
+        {
+            get { return descriptionText; }
+            set { descriptionText = value; }
         }
 
         #endregion

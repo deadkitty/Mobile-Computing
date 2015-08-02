@@ -87,11 +87,6 @@ namespace JapanischTrainer.Database
                 repetition = 0;
                 nextInterval = 0;
             }
-            //eFactor = 2.5f;
-            //repetition = 0;
-            //nextInterval = 0;
-            //correctAnswered = Convert.ToInt32(fragments[6]);
-            //learnProgress   = Convert.ToInt32(fragments[7]);
 
             this.lessonID = setID;
         }
@@ -126,9 +121,6 @@ namespace JapanischTrainer.Database
             sb.Append(repetition);
             sb.Append("|");
             sb.Append(nextInterval);
-            //sb.Append(correctAnswered);
-            //sb.Append("|");
-            //sb.Append(learnProgress);
 
             return sb.ToString();
         }
@@ -136,6 +128,23 @@ namespace JapanischTrainer.Database
         public String ToDebugString()
         {
             return id + "|" + kanji + "|" + meaning + "|" + eFactor +  "|" + repetition + "|" + nextInterval;
+        }
+
+        /// <summary>
+        /// <para>Updates the kanji</para>
+        /// <para>updateString Pattern should be:</para>
+        /// <para>id|kanji|meaning|onyomi|kunyomi|example</para>
+        /// </summary>
+        /// <param name="updateString"></param>
+        public void Update(String updateString)
+        {
+            String[] parts = updateString.Split('|');
+            
+            kanji   = parts[1];
+            meaning = parts[2];
+            onyomi  = parts[3];
+            kunyomi = parts[4];            
+            example = parts[5];
         }
     }
 }

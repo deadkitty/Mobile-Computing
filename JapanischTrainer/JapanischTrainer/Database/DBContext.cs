@@ -54,6 +54,11 @@ namespace JapanischTrainer.Database
         {
             return (from c in lessons where c.type == (int)setType select c).ToArray();
         }
+        
+        public Lesson[] GetLessonsUnsorted()
+        {
+            return (from c in lessons select c).ToArray();
+        }
 
         #endregion
 
@@ -153,6 +158,13 @@ namespace JapanischTrainer.Database
         #endregion
 
         #region Util
+        
+		public int GetLastLessonID()
+		{
+			IQueryable<int> qLessonIDs = from c in lessons orderby c.id descending select c.id;
+
+			return qLessonIDs.Count() > 0 ? qLessonIDs.First() : 0;
+		}
 
         private int[] ExtractIDs(Lesson[] lessons)
         {

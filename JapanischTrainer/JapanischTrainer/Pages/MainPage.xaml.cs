@@ -45,7 +45,7 @@ namespace JapanischTrainer.Pages
             }
 
             loadAllWordsCheckBox.IsChecked = AppSettings.LoadAllWords;
-            partLessonsCheckBox .IsChecked = AppSettings.PartLessons;
+            partLessonsCheckBox .IsChecked = AppSettings.LearnWrongWords;
             showDescCheckBox    .IsChecked = AppSettings.ShowDescription;
 
             correctWrongRelationSlider.ValueChanged += correctWrongRelationSlider_ValueChanged;
@@ -54,7 +54,7 @@ namespace JapanischTrainer.Pages
 
             correctWrongRelationSlider.Value = AppSettings.CorrectWrongRelation * 100.0f;
             minimumCountSlider        .Value = AppSettings.MinimumWordCount;
-            partLessonsCountSlider    .Value = AppSettings.PartLessonWordsCount;
+            partLessonsCountSlider    .Value = AppSettings.LearnWrongWordsCount;
         }
 
         #endregion
@@ -168,13 +168,13 @@ namespace JapanischTrainer.Pages
 
         private void partLessonsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            AppSettings.PartLessons = true;
+            AppSettings.LearnWrongWords = true;
             partLessonsCountSlider.IsEnabled = true;
         }
 
         private void partLessonsCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            AppSettings.PartLessons = false;
+            AppSettings.LearnWrongWords = false;
             partLessonsCountSlider.IsEnabled = false;
         }
 
@@ -206,7 +206,7 @@ namespace JapanischTrainer.Pages
 
         private void partLessonsCountSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            AppSettings.PartLessonWordsCount = (int)e.NewValue;
+            AppSettings.LearnWrongWordsCount = (int)e.NewValue;
             partLessonsCountTextblock.Text = "Wörter pro Teillektion: " + (int)partLessonsCountSlider.Value;
         }
 
@@ -296,7 +296,15 @@ namespace JapanischTrainer.Pages
             FileSavePicker picker = new FileSavePicker();
             picker.ContinuationData["Operation"] = "ExportDatabase";
             picker.FileTypeChoices.Add("TextFile", new List<string>() { ".txt" });
-            picker.SuggestedFileName = "NihongoSenpaiExport";
+
+            String time = DateTime.Now.ToString();
+            time = time.Replace(' ', '_');
+            time = time.Replace(":", "");
+            time = time.Replace(".", "");
+
+            String fileName = "NihongoSenpaiExport_" + time;
+
+            picker.SuggestedFileName = fileName;
             picker.PickSaveFileAndContinue();
         }
 
@@ -313,7 +321,7 @@ namespace JapanischTrainer.Pages
                     IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read);
 
                     DataManager.ConnectToLocalStorageDatabase();
-                    String updateStatus = DataManager.UpdateDatabase(fileStream);
+                    String updateStatus = DataManager.ImportFromFile(fileStream);
                     DataManager.CloseConnection();
 
                     fileStream.Dispose();
@@ -334,7 +342,7 @@ namespace JapanischTrainer.Pages
                 IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite);
 
                 DataManager.ConnectToLocalStorageDatabase();
-                String exportStatus = DataManager.ExportDatabase(fileStream);
+                String exportStatus = DataManager.ExportToFile(fileStream);
                 DataManager.CloseConnection();
 
                 fileStream.Dispose();

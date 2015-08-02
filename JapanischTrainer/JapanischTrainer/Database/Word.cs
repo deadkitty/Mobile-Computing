@@ -29,6 +29,20 @@ namespace JapanischTrainer.Database
 
         #endregion
 
+        #region EAnswerState
+
+        public enum EAnswerState
+        {
+            none,
+            japanese,
+            translation,
+            both,
+            count,
+            undefined = -1,
+        }
+
+        #endregion
+
         #region Fields
 
         [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "INT NOT NULL Identity", CanBeNull = false, AutoSync = AutoSync.OnInsert)]
@@ -88,14 +102,9 @@ namespace JapanischTrainer.Database
         public int lessonID;
 
 
-        public bool showJWord;
+        public EAnswerState answerState = EAnswerState.none;
 
-        /// <summary>
-        /// because i make a copy of a word every time the kanji will be asked i need a reference to the original
-        /// to make sure to increase the counter of the original as well. otherwise the counter for kanjis will
-        /// be ignored when i update the database!
-        /// </summary>
-        public Word original = null;
+        public bool showJWord = false;
 
         #endregion
 
@@ -132,8 +141,8 @@ namespace JapanischTrainer.Database
         /// </summary>
         public int TimeStampTransl
         {
-            get { return original.timeStampTransl; }
-            set { original.timeStampTransl = value; }
+            get { return timeStampTransl; }
+            set { timeStampTransl = value; }
         }
         #endregion
 
@@ -155,53 +164,96 @@ namespace JapanischTrainer.Database
 
             correctTranslation  = source.correctTranslation;
             wrongTranslation    = source.wrongTranslation;
-            correctJapanese        = source.correctJapanese;
-            wrongJapanese          = source.wrongJapanese;
+            correctJapanese     = source.correctJapanese;
+            wrongJapanese       = source.wrongJapanese;
 
             type                = source.type;
             showFlags           = source.showFlags;
             timeStampJapanese   = source.timeStampJapanese;
             timeStampTransl     = source.timeStampTransl;
             lessonID            = source.lessonID;
-
-            original            = source;
         }
 
         public Word(String text, int lessonID)
         {
             String[] fragments = text.Split('|');
 
-            if (fragments.Length == 14)
+            switch(fragments.Length)
             {
-                this.id                  = Convert.ToInt32(fragments[0]);
-                this.lessonID            = Convert.ToInt32(fragments[1]);
-                this.kana                = fragments[2];
-                this.kanji               = fragments[3];
-                this.translation         = fragments[4];
-                this.description         = fragments[5];
-                this.type                = StringToType(fragments[6]);
-                this.correctTranslation  = Convert.ToInt16(fragments[7]);
-                this.wrongTranslation    = Convert.ToInt16(fragments[8]);
-                this.correctJapanese     = Convert.ToInt16(fragments[9]);
-                this.wrongJapanese       = Convert.ToInt16(fragments[10]);
-                this.showFlags           = Convert.ToInt32(fragments[11]);
-                this.timeStampJapanese   = Convert.ToInt32(fragments[12]);
-                this.timeStampTransl     = Convert.ToInt32(fragments[13]);
-            }
-            else
-            {
-                this.kana        = fragments[0];
-                this.kanji       = fragments[1];
-                this.translation = fragments[2];
-                this.description = fragments[3];
+                case 14: //import string from earlier export of database
+                
+                    this.id                  = Convert.ToInt32(fragments[0]);
+                    this.lessonID            = Convert.ToInt32(fragments[1]);
+                    this.kana                = fragments[2];
+                    this.kanji               = fragments[3];
+                    this.translation         = fragments[4];
+                    this.description         = fragments[5];
+                    this.type                = StringToType(fragments[6]);
+                    this.correctTranslation  = Convert.ToInt16(fragments[7]);
+                    this.wrongTranslation    = Convert.ToInt16(fragments[8]);
+                    this.correctJapanese     = Convert.ToInt16(fragments[9]);
+                    this.wrongJapanese       = Convert.ToInt16(fragments[10]);
+                    this.showFlags           = Convert.ToInt32(fragments[11]);
+                    this.timeStampJapanese   = Convert.ToInt32(fragments[12]);
+                    this.timeStampTransl     = Convert.ToInt32(fragments[13]);
 
-                if (fragments.Length == 5)
-                {
+                    break;
+
+                case 6: //add new word for existing lesson
+                
+                    this.lessonID    = Convert.ToInt32(fragments[0]);
+                    this.kana        = fragments[1];
+                    this.kanji       = fragments[2];
+                    this.translation = fragments[3];
+                    this.description = fragments[4];
+                    this.type        = StringToType(fragments[5].ToLower());
+
+                    break;
+
+                default: //add new word for new lesson
+                    
+                    this.kana        = fragments[0];
+                    this.kanji       = fragments[1];
+                    this.translation = fragments[2];
+                    this.description = fragments[3];
                     this.type = StringToType(fragments[4].ToLower());
-                }
+                    
+                    this.lessonID = lessonID;
 
-                this.lessonID = lessonID;
+                    break;
             }
+
+            //if (fragments.Length == 14)
+            //{
+            //    this.id                  = Convert.ToInt32(fragments[0]);
+            //    this.lessonID            = Convert.ToInt32(fragments[1]);
+            //    this.kana                = fragments[2];
+            //    this.kanji               = fragments[3];
+            //    this.translation         = fragments[4];
+            //    this.description         = fragments[5];
+            //    this.type                = StringToType(fragments[6]);
+            //    this.correctTranslation  = Convert.ToInt16(fragments[7]);
+            //    this.wrongTranslation    = Convert.ToInt16(fragments[8]);
+            //    this.correctJapanese     = Convert.ToInt16(fragments[9]);
+            //    this.wrongJapanese       = Convert.ToInt16(fragments[10]);
+            //    this.showFlags           = Convert.ToInt32(fragments[11]);
+            //    this.timeStampJapanese   = Convert.ToInt32(fragments[12]);
+            //    this.timeStampTransl     = Convert.ToInt32(fragments[13]);
+            //}
+            //else
+            //{
+            //    this.kana        = fragments[0];
+            //    this.kanji       = fragments[1];
+            //    this.translation = fragments[2];
+            //    this.description = fragments[3];
+
+            //    if (fragments.Length == 5)
+            //    {
+            //        this.type = StringToType(fragments[4].ToLower());
+            //    }
+
+            //    this.lessonID = lessonID;
+            //}
 
             if (kanji == "")
             {

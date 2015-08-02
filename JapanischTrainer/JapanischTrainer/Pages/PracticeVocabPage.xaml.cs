@@ -22,14 +22,9 @@ namespace JapanischTrainer.Pages
             : base()
         {
             InitializeComponent();
-
-            //for the sake of non complexity^^ and because of i made part lessons to learn wrong words in
-            //near future again, i disable the option to learn wrong words in the middle of a part lesson
-            if(AppSettings.PartLessons)
-            {
-                (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).IsEnabled = false;
-            }
             
+            pageScrollViewer.IsEnabled = true;
+
             UpdateView();
         }
 
@@ -86,7 +81,7 @@ namespace JapanischTrainer.Pages
 
         private void learnWrongWordsItem_Click(object sender, EventArgs e)
         {
-            if (VocabData.WrongAnsweredWords.Count > 0)
+            if (VocabData.IncorrectWords.Count > 0)
             {
                 VocabController.LearnWrongWords();
 
@@ -106,7 +101,7 @@ namespace JapanischTrainer.Pages
         
         public void UpdateView()
         {
-            if(VocabData.ItemsLeft == 0)
+            if (VocabData.ItemsLeft == 0)
             {
                 EndPractice();
 
@@ -117,54 +112,11 @@ namespace JapanischTrainer.Pages
             wordsCorrectValueTextblock.Text = VocabData.ItemsCorrect.ToString();
             wordsWrongValueTextblock  .Text = VocabData.ItemsWrong  .ToString();
 
-            descriptionTextblock.Text = null;
-
-            if (AppSettings.ShowDescription)
-            {
-                switch (VocabData.ActiveWord.showFlags)
-                {
-                    case 1: if (!VocabData.ActiveWord.showJWord) descriptionTextblock.Text = VocabData.ActiveWord.ToDescriptionString(); break;
-                    case 2: if ( VocabData.ActiveWord.showJWord) descriptionTextblock.Text = VocabData.ActiveWord.ToDescriptionString(); break;
-                    case 3:                                      descriptionTextblock.Text = VocabData.ActiveWord.ToDescriptionString(); break;
-                }
-            }
-
-            if (VocabData.ActiveWord.showJWord)
-            {
-                if (VocabData.ActiveWord.kanji != null)
-                {
-                    visibleTextblock.Text = VocabData.ActiveWord.kanji;
-                    hiddenTextblock.Text = VocabData.ActiveWord.kana + ",\n" + VocabData.ActiveWord.translation;
-                }
-                else
-                {
-                    visibleTextblock.Text = VocabData.ActiveWord.kana;
-                    hiddenTextblock.Text = VocabData.ActiveWord.translation;
-                }
-            }
-            else
-            {
-                visibleTextblock.Text = VocabData.ActiveWord.translation;
-
-                if (VocabData.ActiveWord.kanji != null)
-                {
-                    hiddenTextblock.Text = VocabData.ActiveWord.kanji + ",\n" + VocabData.ActiveWord.kana;
-                }
-                else
-                {
-                    hiddenTextblock.Text = VocabData.ActiveWord.kana;
-                }
-            }
-
-            if (pageScrollViewer.ScrollableHeight > pageScrollViewer.Height)
-            {
-                pageScrollViewer.IsEnabled = false;
-            }
-            else
-            {
-                pageScrollViewer.IsEnabled = true;
-            }
+            visibleTextblock    .Text = VocabData.ShownText;
+            hiddenTextblock     .Text = VocabData.AnswerText;
+            descriptionTextblock.Text = VocabData.DescriptionText;
         }
+
 
         public void EndPractice()
         {

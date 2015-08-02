@@ -24,14 +24,16 @@ namespace JapanischTrainer.Pages.Controls
 
         public void FillControl(Word word)
         {
-            if(word.original == null)
-            {
-                this.word = word;
-            }
-            else
-            {
-                this.word = word.original;
-            }
+            //if(word.original == null)
+            //{
+            //    this.word = word;
+            //}
+            //else
+            //{
+            //    this.word = word.original;
+            //}
+
+            this.word = word;
 
             kanaTextbox.Text = word.kana;
             kanjiTextbox.Text = word.kanji == null ? "" : word.kanji;

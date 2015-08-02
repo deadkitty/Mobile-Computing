@@ -72,7 +72,7 @@ namespace JapanischTrainer.Pages
 
                 VocabController.LoadLessons(selectedLessons);
 
-                if (VocabData.Words.Length == 0)
+                if (VocabData.Words.Count == 0)
                 {
                     MessageBox.Show("Keine Wörter in den gewählten Lektionen mehr verfügbar!");
                     VocabController.Deinitialize();

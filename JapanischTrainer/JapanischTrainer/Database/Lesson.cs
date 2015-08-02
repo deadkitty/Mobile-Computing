@@ -24,6 +24,14 @@ namespace JapanischTrainer.Database
         [Column(CanBeNull = false)]
         public String name;
 
+        /// <summary>
+        /// <para>Type of the Lesson</para>
+        /// <para>0 - Vocab</para>
+        /// <para>1 - Insert</para>
+        /// <para>2 - conjugation Lesson (unused yet)</para>
+        /// <para>3 - Kanji Flashcards</para>
+        /// <para>4 - Grammar (unused yet)</para>
+        /// </summary>
         [Column(CanBeNull = false)]
         public int type;
 
@@ -84,12 +92,21 @@ namespace JapanischTrainer.Database
         /// <para>id|name|size</para>
         /// <para>type can not be changed yet</para>
         /// </summary>
-        public void Update(String updateString)
-        {
-            String[] textFragments = updateString.Split('|');
+		//public void Update(String updateString)
+		//{
+		//	String[] textFragments = updateString.Split('|');
 
-            name = textFragments[1];
-            size = Convert.ToInt32(textFragments[2]);
-        }
+		//	name = textFragments[1];
+		//	size = Convert.ToInt32(textFragments[2]);
+		//}
+
+		/// <summary>
+		/// Updates the Lesson name with the name in the newer Lesson parameter
+		/// </summary>
+		/// <param name="newer"></param>
+		public void Update(Lesson newer)
+		{
+			name = newer.name;
+		}
     }
 }

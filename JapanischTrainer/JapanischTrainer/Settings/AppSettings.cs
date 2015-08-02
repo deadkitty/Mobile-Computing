@@ -16,19 +16,19 @@ namespace JapanischTrainer.Settings
         private static int minimumWordCount = 5;
         private static float correctWrongRelation = 0.9f;
 
-        private static bool partLessons = false;
-        private static int partLessonWordsCount = 15;
+        private static bool learnWrongWords = false;
+        private static int learnWrongWordsCount = 15;
 
         private static bool showDescription = true;
         private static String backgroundImage = null;
 
-        private static int databaseVersion = 0;
+        //private static int databaseVersion = 0;
 
         private static int timeStamp   = 0;
         private static int sortOrder   = 3;
         private static int loadOptions = 4095;  //binary : 1111 1111 1111 (at first start load all types)
         
-        private static int lastLessonID = 0;
+        //private static int lastLessonID = 0;
 
         private static int flashCardsInterval = 1;
 
@@ -39,19 +39,19 @@ namespace JapanischTrainer.Settings
         private static String minimumWordCountKey = "minimumWordCount";
         private static String correctWrongRelationKey = "correctWrongRelation";
 
-        private static String partLessonsKey = "partLessons";
-        private static String partLessonWordsCountKey = "partLessonWordsCount";
+        private static String learnWrongWordsKey = "learnWrongWords";
+        private static String learnWrongWordsCountKey = "learnWrongWordsCount";
 
         private static String showDescriptionKey = "showDescription";
         private static String backgroundImageKey = "backgroundImage";
 
-        private static String databaseVersionKey = "databaseVersion";
+        //private static String databaseVersionKey = "databaseVersion";
 
         private static String timeStampKey   = "timeStamp";
         private static String sortOrderKey   = "sortOrder";
         private static String loadOptionsKey = "loadOptions";
 
-        private static String lastLessonIDKey = "lastLessonID";
+        //private static String lastLessonIDKey = "lastLessonID";
 
         private static String flashCardsIntervalKey = "flashCardsInterval";
 
@@ -150,26 +150,26 @@ namespace JapanischTrainer.Settings
         /// for the next round and answers them again wrong. but he can remember 10 words
         /// and answer them correct in the next round ;D
         /// </summary>
-        public static bool PartLessons
+        public static bool LearnWrongWords
         {
-            get { return partLessons; }
+            get { return learnWrongWords; }
             set
             {
-                partLessons = value;
-                settings[partLessonsKey] = value;
+                learnWrongWords = value;
+                settings[learnWrongWordsKey] = value;
             }
         }
 
         /// <summary>
         /// the number of words that will be learned in one part lesson
         /// </summary>
-        public static int PartLessonWordsCount
+        public static int LearnWrongWordsCount
         {
-            get { return partLessonWordsCount; }
+            get { return learnWrongWordsCount; }
             set
             {
-                partLessonWordsCount = value;
-                settings[partLessonWordsCountKey] = value;
+                learnWrongWordsCount = value;
+                settings[learnWrongWordsCountKey] = value;
             }
         }
 
@@ -189,15 +189,15 @@ namespace JapanischTrainer.Settings
             }
         }
 
-        public static int DatabaseVersion
-        {
-            get { return databaseVersion; }
-            set
-            {
-                databaseVersion = value;
-                settings[databaseVersionKey] = value;
-            }
-        }
+		//public static int DatabaseVersion
+		//{
+		//	get { return databaseVersion; }
+		//	set
+		//	{
+		//		databaseVersion = value;
+		//		settings[databaseVersionKey] = value;
+		//	}
+		//}
 
         public static int TimeStamp
         {
@@ -242,15 +242,15 @@ namespace JapanischTrainer.Settings
         /// <summary>
         /// Contains Id of the last lesson that was inserted in the database
         /// </summary>
-        public static int LastLessonID
-        {
-            get { return AppSettings.lastLessonID; }
-            set 
-            { 
-                lastLessonID = value;
-                settings[lastLessonIDKey] = value;
-            }
-        }
+		//public static int LastLessonID
+		//{
+		//	get { return AppSettings.lastLessonID; }
+		//	set 
+		//	{ 
+		//		lastLessonID = value;
+		//		settings[lastLessonIDKey] = value;
+		//	}
+		//}
         
         public static int FlashCardsInterval
         {
@@ -280,19 +280,19 @@ namespace JapanischTrainer.Settings
                 settings[minimumWordCountKey]     = minimumWordCount;
                 settings[correctWrongRelationKey] = correctWrongRelation;
 
-                settings[partLessonsKey]          = partLessons;
-                settings[partLessonWordsCountKey] = partLessonWordsCount;
+                settings[learnWrongWordsKey]          = learnWrongWords;
+                settings[learnWrongWordsCountKey] = learnWrongWordsCount;
 
                 settings[showDescriptionKey]      = showDescription;
                 settings[backgroundImageKey]      = backgroundImage;
 
-                settings[databaseVersionKey]      = databaseVersion;
+                //settings[databaseVersionKey]      = databaseVersion;
 
                 settings[timeStampKey]            = timeStamp;
                 settings[sortOrderKey]            = sortOrder;
                 settings[loadOptionsKey]          = loadOptions;
 
-                settings[lastLessonIDKey]         = lastLessonID;
+                //settings[lastLessonIDKey]         = lastLessonID;
 
                 settings[flashCardsIntervalKey]   = flashCardsInterval;
             }
@@ -306,19 +306,19 @@ namespace JapanischTrainer.Settings
                 minimumWordCount     = (int)settings[minimumWordCountKey];
                 correctWrongRelation = (float)settings[correctWrongRelationKey];
 
-                partLessons          = (bool)settings[partLessonsKey];
-                partLessonWordsCount = (int)settings[partLessonWordsCountKey];
+                learnWrongWords          = (bool)settings[learnWrongWordsKey];
+                learnWrongWordsCount = (int)settings[learnWrongWordsCountKey];
 
                 showDescription      = (bool)settings[showDescriptionKey];
                 backgroundImage      = (String)settings[backgroundImageKey];
 
-                databaseVersion      = (int)settings[databaseVersionKey];
+                //databaseVersion      = (int)settings[databaseVersionKey];
 
                 timeStamp            = (int)settings[timeStampKey];
                 sortOrder            = (int)settings[sortOrderKey];
                 loadOptions          = (int)settings[loadOptionsKey];
 
-                lastLessonID         = (int)settings[lastLessonIDKey];
+                //lastLessonID         = (int)settings[lastLessonIDKey];
 
                 flashCardsInterval   = (int)settings[flashCardsIntervalKey];
             }
