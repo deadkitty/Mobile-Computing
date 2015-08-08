@@ -29,15 +29,15 @@ namespace JapanischTrainer.Controller
             VocabData.IncorrectWords.Clear();
             
             VocabData.ItemsWrong = 0;
-
-            PrepareWords();
-
+            
             switch (AppSettings.WordPracticeMethod)
             {
                 case 0: FilterWords(); break;
                 case 1: FilterGermanWords(); break;
                 case 2: FilterJapaneseWords(); break;
             }
+                        
+            PrepareWords();
 
             switch (AppSettings.SortOrder)
             {
@@ -53,20 +53,27 @@ namespace JapanischTrainer.Controller
 
         private static void PrepareWords()
         {
-            foreach(Word w in AppData.Words)
+            foreach(Word w in VocabData.Words)
             {
                 //if i don't set these here in the next round, answerstate will still be set to "both"
                 switch (AppSettings.WordPracticeMethod)
                 {
                     case 0:
                         
-                        w.showJWord = Convert.ToBoolean(Util.GetRandomNumber(2));
-                        w.answerState = Word.EAnswerState.none;
+                        //words that are just one time in the list were set by filter words to japanese or translation, so i just have to 
+                        //look for those words that are still 2 times in the list, where the answerstate is still set to both
+                        if(w.answerState == Word.EAnswerState.both)
+                        {
+                            w.showJWord = Convert.ToBoolean(Util.GetRandomNumber(2));
+                            w.answerState = Word.EAnswerState.none;
+                        }
                         
                         break;
 
                     case 1:
 
+                        //i don't set the states back in filter german/japanese words because of the load all option and 
+                        //because i use add range then, i can't set them there either, so i make this here
                         w.showJWord = false;
                         w.answerState = Word.EAnswerState.japanese;
                         
@@ -97,10 +104,18 @@ namespace JapanischTrainer.Controller
                     {
                         VocabData.Words.Add(w);
                     }
+                    else //if just the word is just added one time i have to make sure that the correct answerstate is already set
+                    {
+                        w.answerState = Word.EAnswerState.translation;
+                    }
 
                     if (w.CorrectWrongCountJapanese < AppSettings.MinimumWordCount || w.CorrectWrongRelationJapanese < AppSettings.CorrectWrongRelation)
                     {
                         VocabData.Words.Add(w);
+                    }
+                    else
+                    {
+                        w.answerState = Word.EAnswerState.japanese;
                     }
                 }
             }

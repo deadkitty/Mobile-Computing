@@ -152,8 +152,6 @@ namespace JapanischTrainer.Database
 
         public static void UpdateProgress()
         {
-            Debug.WriteLine("Update Database!");
-
             context.SubmitChanges(System.Data.Linq.ConflictMode.ContinueOnConflict);
             
             foreach(ObjectChangeConflict occ in context.ChangeConflicts)
