@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-	x:Class="JapanischTrainer.Pages.KanjiDetailPage"
+	x:Class="NihongoSenpai.Pages.KanjiDetailPage"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -7,7 +7,7 @@
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:JapanischTrainer.Pages"
+    xmlns:local="clr-namespace:NihongoSenpai.Pages"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -20,7 +20,7 @@
         <controls:Pivot Name="privotCtrl" SelectionChanged="privotCtrl_FirstSelectionChanged">
             <!--Pivot-Element 1-->
             <controls:PivotItem Margin="0,-10,0,0">
-                <Grid xmlns:src="clr-namespace:JapanischTrainer.Pages.Controls" Margin="0">
+                <Grid xmlns:src="clr-namespace:NihongoSenpai.Pages.Controls" Margin="0">
                     <ScrollViewer>
                         <src:DetailKanjiItem Name="kanjiItem0"/>
                     </ScrollViewer>
@@ -29,7 +29,7 @@
 
             <!--Pivot-Element 2-->
             <controls:PivotItem Margin="0,-10,0,0">
-                <Grid xmlns:src="clr-namespace:JapanischTrainer.Pages.Controls" Margin="0">
+                <Grid xmlns:src="clr-namespace:NihongoSenpai.Pages.Controls" Margin="0">
                     <ScrollViewer>
                         <src:DetailKanjiItem Name="kanjiItem1"/>
                     </ScrollViewer>
@@ -37,7 +37,7 @@
             </controls:PivotItem>
             <!--Pivot-Element 3-->
             <controls:PivotItem Margin="0,-10,0,0">
-                <Grid xmlns:src="clr-namespace:JapanischTrainer.Pages.Controls" Margin="0">
+                <Grid xmlns:src="clr-namespace:NihongoSenpai.Pages.Controls" Margin="0">
                     <ScrollViewer>
                         <src:DetailKanjiItem Name="kanjiItem2"/>
                     </ScrollViewer>

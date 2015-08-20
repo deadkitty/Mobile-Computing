@@ -7,12 +7,12 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Pages.Controls;
-using JapanischTrainer.Controller;
-using JapanischTrainer.Data;
-using JapanischTrainer.Database;
+using NihongoSenpai.Pages.Controls;
+using NihongoSenpai.Controller;
+using NihongoSenpai.Data;
+using NihongoSenpai.Database;
 
-namespace JapanischTrainer.Pages
+namespace NihongoSenpai.Pages
 {
     public partial class PracticeFlashcardsPage : PhoneApplicationPage
     {

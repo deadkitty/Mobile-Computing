@@ -1,12 +1,12 @@
-﻿using JapanischTrainer.Data;
-using JapanischTrainer.Database;
+﻿using NihongoSenpai.Data;
+using NihongoSenpai.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JapanischTrainer.Controller
+namespace NihongoSenpai.Controller
 {
     public static class InsertController
     {

@@ -1,0 +1,61 @@
+﻿<local:BasePage
+    x:Class="NihongoSenpai.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NihongoSenpai.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Hub x:Name="hubMenu">
+        <Hub.Header>
+            <Image Source="ms-appx:///Assets/TitleBanner.png"/>
+        </Hub.Header>
+        <Hub.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/HubBackground.png"/>
+        </Hub.Background>
+
+        <HubSection>
+            <HubSection.Header>
+                <TextBlock Text="Übungen" FontSize="40" FontFamily="Comic Sans MS" Margin="20,0"/>
+            </HubSection.Header>
+            <DataTemplate>
+                <StackPanel>
+                    <Button x:Name="practiceVocabButton"        Content="Vokabeln lernen"       Style="{StaticResource MenuButtonStyle}" Click="practiceVocabButton_Click"/>
+                    <Button x:Name="practiceInsertButton"	    Content="Lückentext"            Style="{StaticResource MenuButtonStyle}" Click="practiceInsertButton_Click"/>
+                    <Button x:Name="practiceConjuctionButton"   Content="Wörter konjugieren"    Style="{StaticResource MenuButtonStyle}" Click="practiceConjuctionButton_Click"/>
+                    <Button x:Name="practiceCombineWordsButton" Content="Wörter zusammensetzen" Style="{StaticResource MenuButtonStyle}" Click="practiceCombineWordsButton_Click"/>
+                    <Button x:Name="practiceFlashcardsButton"   Content="Kanjiflashcards"       Style="{StaticResource MenuButtonStyle}" Click="practiceFlashcardsButton_Click"/>
+                </StackPanel>
+            </DataTemplate>
+        </HubSection>
+
+        <HubSection>
+            <HubSection.Header>
+                <TextBlock Text="Erklärungen" FontSize="40" FontFamily="Comic Sans MS" Margin="20,0"/>
+            </HubSection.Header>
+            <DataTemplate>
+                <StackPanel>
+                    <Button x:Name="showWordsButton"   Content="Wörter anzeigen" Style="{StaticResource MenuButtonStyle}" Click="showWordsButton_Click"/>
+                    <Button x:Name="showKanjiButton"   Content="Kanji anzeigen"  Style="{StaticResource MenuButtonStyle}" Click="showKanjiButton_Click"/>
+                    <Button x:Name="showGrammarButton" Content="Grammatik"       Style="{StaticResource MenuButtonStyle}" Click="showGrammarButton_Click"/>
+                    <Button x:Name="searchWordsButton" Content="Wörter suchen"   Style="{StaticResource MenuButtonStyle}" Click="searchWordsButton_Click"/>
+                </StackPanel>
+            </DataTemplate>
+        </HubSection>
+
+        <HubSection>
+            <HubSection.Header>
+                <TextBlock Text="Sonstiges" FontSize="40" FontFamily="Comic Sans MS" Margin="20,0"/>
+            </HubSection.Header>
+            <DataTemplate>
+                <StackPanel>
+                    <Button x:Name="importButton"           Content="Inhalt hinzufügen"      Style="{StaticResource MenuButtonStyle}" Click="importButton_Click"/>
+                    <Button x:Name="exportButton"           Content="Datenbank Exportieren"  Style="{StaticResource MenuButtonStyle}" Click="exportButton_Click"/>
+                    <Button x:Name="resetAllButton"         Content="Übungen zurücksetzen"   Style="{StaticResource MenuButtonStyle}" Click="resetAllButton_Click"/>
+                    <Button x:Name="changeBackgroundButton" Content="Hintergrundbild ändern" Style="{StaticResource MenuButtonStyle}" Click="changeBackgroundButton_Click"/>
+                </StackPanel>
+            </DataTemplate>
+        </HubSection>
+    </Hub>
+</local:BasePage>

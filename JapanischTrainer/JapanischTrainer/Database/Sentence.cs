@@ -2,7 +2,7 @@
 using System.Data.Linq.Mapping;
 using System.Text;
 
-namespace JapanischTrainer.Database
+namespace NihongoSenpai.Database
 {
     [Table]
     public class Sentence

@@ -1,4 +1,4 @@
-﻿using JapanischTrainer.Settings;
+﻿using NihongoSenpai.Settings;
 using System;
 using System.Collections.Generic;
 using System.Data.Linq;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace JapanischTrainer.Database
+namespace NihongoSenpai.Database
 {
     public class DBContext : DataContext
     {

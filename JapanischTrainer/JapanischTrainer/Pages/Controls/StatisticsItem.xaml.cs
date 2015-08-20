@@ -7,10 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Data;
-using JapanischTrainer.Database;
+using NihongoSenpai.Data;
+using NihongoSenpai.Database;
 
-namespace JapanischTrainer.Pages.Controls
+namespace NihongoSenpai.Pages.Controls
 {
     public partial class StatisticsItem : UserControl
     {

@@ -1,11 +1,11 @@
-﻿using JapanischTrainer.Database;
+﻿using NihongoSenpai.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JapanischTrainer.Database
+namespace NihongoSenpai.Database
 {
     public static class AppData
     {

@@ -7,11 +7,11 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Controller;
-using JapanischTrainer.Data;
+using NihongoSenpai.Controller;
+using NihongoSenpai.Data;
 using System.Windows.Media;
 
-namespace JapanischTrainer.Pages
+namespace NihongoSenpai.Pages
 {
     public partial class PracticeCombineWordsPage : PhoneApplicationPage
     {

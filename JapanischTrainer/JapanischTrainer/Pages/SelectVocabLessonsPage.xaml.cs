@@ -7,14 +7,14 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Database;
-using JapanischTrainer.Data;
-using JapanischTrainer.Settings;
-using JapanischTrainer.Controller;
+using NihongoSenpai.Database;
+using NihongoSenpai.Data;
+using NihongoSenpai.Settings;
+using NihongoSenpai.Controller;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace JapanischTrainer.Pages
+namespace NihongoSenpai.Pages
 {
     public partial class SelectVocabLessonsPage : PhoneApplicationPage
     {

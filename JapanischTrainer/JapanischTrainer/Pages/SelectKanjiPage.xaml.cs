@@ -8,9 +8,9 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media;
-using JapanischTrainer.Database;
+using NihongoSenpai.Database;
 
-namespace JapanischTrainer.Pages
+namespace NihongoSenpai.Pages
 {
     public partial class SelectKanjiPage : PhoneApplicationPage
     {

@@ -1,6 +1,6 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="JapanischTrainer.Pages.PracticeFlashcardsPage" 
-    xmlns:Controls="clr-namespace:JapanischTrainer.Pages.Controls" 
+    x:Class="NihongoSenpai.Pages.PracticeFlashcardsPage" 
+    xmlns:Controls="clr-namespace:NihongoSenpai.Pages.Controls" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"

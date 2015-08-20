@@ -7,11 +7,11 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Database;
-using JapanischTrainer.Controller;
-using JapanischTrainer.Data;
+using NihongoSenpai.Database;
+using NihongoSenpai.Controller;
+using NihongoSenpai.Data;
 
-namespace JapanischTrainer.Pages
+namespace NihongoSenpai.Pages
 {
     public partial class SelectConjugationLessonsPage : PhoneApplicationPage
     {

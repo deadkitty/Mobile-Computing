@@ -6,12 +6,12 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Resources;
-using JapanischTrainer.Settings;
-using JapanischTrainer.Database;
+using NihongoSenpai.Resources;
+using NihongoSenpai.Settings;
+using NihongoSenpai.Database;
 using Windows.ApplicationModel.Activation;
 
-namespace JapanischTrainer
+namespace NihongoSenpai
 {
     public partial class App : Application
     {

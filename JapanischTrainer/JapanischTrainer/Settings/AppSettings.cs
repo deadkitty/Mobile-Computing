@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO.IsolatedStorage;
 
-namespace JapanischTrainer.Settings
+namespace NihongoSenpai.Settings
 {
     public static class AppSettings
     {

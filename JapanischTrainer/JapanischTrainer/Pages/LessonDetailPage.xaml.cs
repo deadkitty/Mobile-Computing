@@ -7,13 +7,13 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Data;
-using JapanischTrainer.Pages.Controls;
-using JapanischTrainer.Settings;
-using JapanischTrainer.Database;
+using NihongoSenpai.Data;
+using NihongoSenpai.Pages.Controls;
+using NihongoSenpai.Settings;
+using NihongoSenpai.Database;
 using System.Diagnostics;
 
-namespace JapanischTrainer.Pages
+namespace NihongoSenpai.Pages
 {
     public partial class LessonDetailPage : PhoneApplicationPage
     {

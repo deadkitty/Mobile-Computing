@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
+  <Identity Name="c73581b6-a76f-4912-a8e1-54e83f46740d" Publisher="CN=Soi Fon" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="c73581b6-a76f-4912-a8e1-54e83f46740d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>NihongoSenpai.WindowsPhone</DisplayName>
+    <PublisherDisplayName>Soi Fon</PublisherDisplayName>
+    <Logo>Assets\SplashScreen.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.1</OSMinVersion>
+    <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="NihongoSenpai.WindowsPhone.App">
+      <m3:VisualElements DisplayName="Nihongo Senpai ツ" Square150x150Logo="Assets\SplashScreen.png" Square44x44Logo="Assets\SplashScreen.png" Description="NihongoSenpai.WindowsPhone" ForegroundText="light" BackgroundColor="lightGreen">
+        <m3:DefaultTile Square71x71Logo="Assets\SplashScreen.png">
+        </m3:DefaultTile>
+        <m3:SplashScreen Image="Assets\SplashScreen.png" />
+      </m3:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClientServer" />
+  </Capabilities>
+</Package>

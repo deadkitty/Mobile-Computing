@@ -12,7 +12,7 @@ using System.Data.Linq.Mapping;
 using System.Text;
 using System.Globalization;
 
-namespace JapanischTrainer.Database
+namespace NihongoSenpai.Database
 {
     [Table]
     public class Kanji

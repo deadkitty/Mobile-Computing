@@ -1,0 +1,73 @@
+﻿<UserControl
+    x:Class="NihongoSenpai.Resources.Controls.EditWordItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NihongoSenpai.Resources.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="600"
+    d:DesignWidth="400">
+
+    <Grid x:Name="itemRoot" Background="{StaticResource GradientBackgroundBlue}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="15, 10">
+            <TextBlock Text="Kana"/>
+            <TextBox x:Name="kanaTextbox" TextWrapping="Wrap"/>
+            <TextBlock Text="Kanji"/>
+            <TextBox x:Name="kanjiTextbox" TextWrapping="Wrap"/>
+            <TextBlock Text="Deutsch"/>
+            <TextBox x:Name="translationTextbox" TextWrapping="Wrap"/>
+            <TextBlock Text="Beschreibung"/>
+            <TextBox x:Name="descriptionTextbox" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1"  Margin="15, 10" Height="110">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Typ:"/>
+                <ListBox x:Name="typeListbox" SelectionMode="Single" Margin="10,0" FontSize="12" ScrollViewer.VerticalScrollMode="Enabled"  Height="95">
+                    <ListBoxItem Content="Nomen"/>
+                    <ListBoxItem Content="Verb I"/>
+                    <ListBoxItem Content="Verb II"/>
+                    <ListBoxItem Content="Verb III"/>
+                    <ListBoxItem Content="い-Adjektiv"/>
+                    <ListBoxItem Content="な-Adjektiv"/>
+                    <ListBoxItem Content="Adverb"/>
+                    <ListBoxItem Content="Partikel"/>
+                    <ListBoxItem Content="Sonstiges"/>
+                    <ListBoxItem Content="Suffix"/>
+                    <ListBoxItem Content="Präfix"/>
+                    <ListBoxItem Content="Phrase"/>
+                </ListBox>
+            </StackPanel>
+            
+            <StackPanel  Grid.Column="1">
+                <TextBlock Text="Beschreibung Anzeigen:"/>
+                <ListBox x:Name="showFlagListbox" SelectionMode="Single" FontSize="12" Height="95">
+                    <ListBoxItem Content="nie anzeigen"/>
+                    <ListBoxItem Content="Bei Deutschem Wort anz."/>
+                    <ListBoxItem Content="Bei Japanischem Wort anz."/>
+                    <ListBoxItem Content="Immer Anzeigen"/>
+                </ListBox>
+            </StackPanel>
+
+        </Grid>
+
+        <StackPanel  Grid.Row="2" Margin="15, 10">
+            <Button x:Name="editButton"   Content="Ändern"    Style="{StaticResource ConfirmButtonStyle}" Click="editButton_Click"/>
+            <Button x:Name="cancelButton" Content="Abbrechen" Style="{StaticResource CancelButtonStyle}"  Click="cancelButton_Click"/>
+        </StackPanel>
+
+    </Grid>
+    
+</UserControl>

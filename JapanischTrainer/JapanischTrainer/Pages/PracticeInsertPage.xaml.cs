@@ -7,11 +7,11 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Data;
-using JapanischTrainer.Controller;
+using NihongoSenpai.Data;
+using NihongoSenpai.Controller;
 using System.Windows.Media;
 
-namespace JapanischTrainer.Pages
+namespace NihongoSenpai.Pages
 {
     public partial class PracticeInsertPage : PhoneApplicationPage
     {

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using JapanischTrainer.Pages.Controls;
+using NihongoSenpai.Pages.Controls;
 using System.Windows.Media;
 using System.Collections.Generic;
 using Microsoft.Phone.Controls;
-using JapanischTrainer.Data;
-using JapanischTrainer.Controller;
+using NihongoSenpai.Data;
+using NihongoSenpai.Controller;
 
-namespace JapanischTrainer.Pages
+namespace NihongoSenpai.Pages
 {
     public partial class PracticeConjugationPage : PhoneApplicationPage
     {   

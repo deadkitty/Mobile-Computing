@@ -1,4 +1,4 @@
-﻿using JapanischTrainer.Settings;
+﻿using NihongoSenpai.Settings;
 using Microsoft.Phone.Maps.Controls;
 using System;
 using System.Collections;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
 
-namespace JapanischTrainer.Database
+namespace NihongoSenpai.Database
 {
     public static class DataManager
     {

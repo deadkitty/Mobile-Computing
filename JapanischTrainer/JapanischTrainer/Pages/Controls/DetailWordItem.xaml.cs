@@ -7,11 +7,11 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Data;
+using NihongoSenpai.Data;
 using System.Windows.Media;
-using JapanischTrainer.Database;
+using NihongoSenpai.Database;
 
-namespace JapanischTrainer.Pages.Controls
+namespace NihongoSenpai.Pages.Controls
 {
     public partial class DetailWordItem : UserControl
     {

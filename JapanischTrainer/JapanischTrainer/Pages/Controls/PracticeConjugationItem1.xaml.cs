@@ -7,16 +7,21 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Data;
+using NihongoSenpai.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace JapanischTrainer.Pages.Controls
+namespace NihongoSenpai.Pages.Controls
 {
     public partial class PracticeConjugationItem1 : UserControl
     {
         private int itemID;
         private PracticeConjugationPage parentPage;
+
+        public TextBox TargetWordTextbox
+        {
+            get { return targetWordTextbox; }
+        }
 
         public PracticeConjugationItem1()
         {

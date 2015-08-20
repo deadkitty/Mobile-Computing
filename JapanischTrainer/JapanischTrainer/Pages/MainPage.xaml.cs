@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using JapanischTrainer.Settings;
+using NihongoSenpai.Settings;
 using Microsoft.Phone.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -16,10 +16,10 @@ using System.Windows.Media.Imaging;
 using System.IO.IsolatedStorage;
 using Windows.Storage.Pickers;
 using Windows.ApplicationModel.Activation;
-using JapanischTrainer.Database;
-using JapanischTrainer.Pages.Controls;
+using NihongoSenpai.Database;
+using NihongoSenpai.Pages.Controls;
 
-namespace JapanischTrainer.Pages
+namespace NihongoSenpai.Pages
 {
     public partial class MainPage : PhoneApplicationPage
     {
@@ -145,9 +145,7 @@ namespace JapanischTrainer.Pages
         }
 
         #endregion
-
-        #endregion
-        
+                
         #region Settings Menu
 
         #region Checkboxes
@@ -356,6 +354,8 @@ namespace JapanischTrainer.Pages
 
             exportDatabase = false;
         }
+
+        #endregion
 
         #endregion
 

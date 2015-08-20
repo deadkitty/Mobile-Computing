@@ -1,6 +1,6 @@
-﻿using JapanischTrainer.Resources;
+﻿using NihongoSenpai.Resources;
 
-namespace JapanischTrainer
+namespace NihongoSenpai
 {
     /// <summary>
     /// Bietet Zugriff auf Zeichenfolgenressourcen.
